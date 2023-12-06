@@ -31,6 +31,7 @@ namespace DoAnQuanLyQuanNhau
         {
             this.tpCategory = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnSaveFoodCategory = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txbCategoryFoodName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -179,6 +180,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnSaveFoodCategory);
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.txbCategoryFoodName);
             this.panel4.Controls.Add(this.label3);
@@ -188,6 +190,20 @@ namespace DoAnQuanLyQuanNhau
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(602, 499);
             this.panel4.TabIndex = 8;
+            // 
+            // btnSaveFoodCategory
+            // 
+            this.btnSaveFoodCategory.BackColor = System.Drawing.Color.White;
+            this.btnSaveFoodCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveFoodCategory.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSaveFoodCategory.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.save1;
+            this.btnSaveFoodCategory.Location = new System.Drawing.Point(21, 399);
+            this.btnSaveFoodCategory.Name = "btnSaveFoodCategory";
+            this.btnSaveFoodCategory.Size = new System.Drawing.Size(80, 80);
+            this.btnSaveFoodCategory.TabIndex = 5;
+            this.btnSaveFoodCategory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveFoodCategory.UseVisualStyleBackColor = false;
+            this.btnSaveFoodCategory.Click += new System.EventHandler(this.btnSaveFoodCategory_Click);
             // 
             // label2
             // 
@@ -330,6 +346,7 @@ namespace DoAnQuanLyQuanNhau
             this.btnShowFoodCategory.TabIndex = 3;
             this.btnShowFoodCategory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnShowFoodCategory.UseVisualStyleBackColor = false;
+            this.btnShowFoodCategory.Click += new System.EventHandler(this.btnShowFoodCategory_Click);
             // 
             // btnEditFoodCategory
             // 
@@ -1388,5 +1405,6 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.Button btnSaveFoodCategory;
     }
 }
