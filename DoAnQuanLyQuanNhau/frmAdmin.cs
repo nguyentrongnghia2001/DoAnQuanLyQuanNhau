@@ -44,7 +44,7 @@ namespace DoAnQuanLyQuanNhau
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-
+            btnSaveFoodCategory.Enabled = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -57,10 +57,20 @@ namespace DoAnQuanLyQuanNhau
         private void btnShowFoodCategory_Click(object sender, EventArgs e)
         {
             LoadListCategoryFood();
+            btnSaveFoodCategory.Enabled = false;
         }
 
         private void btnAddFoodCategory_Click(object sender, EventArgs e)
         {
+            txbCategoryFoodId.Text = "";
+            txbCategoryFoodName.Text = "";
+            btnSaveFoodCategory.Enabled = true;
+        }
+
+
+        private void btnSaveFoodCategory_Click(object sender, EventArgs e)
+        {
+
             string name = txbCategoryFoodName.Text;
 
             DialogResult result = MessageBox.Show("Bạn có muốn thêm danh mục?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -70,19 +80,27 @@ namespace DoAnQuanLyQuanNhau
             }
             else
             {
-                if (FoodCategoryDAO.Instance.InsertFoodCategory(name))
+                if (string.IsNullOrWhiteSpace(name))
                 {
-                    MessageBox.Show("Thêm danh mục thành công");
-                    LoadListCategoryFood();
-                    if (insertFoodCategory != null)
-                        insertFoodCategory(this, new EventArgs());
+                    MessageBox.Show("Tên danh mục trống!");
                 }
                 else
                 {
-                    MessageBox.Show("Có lỗi khi thêm danh mục");
+                    if (FoodCategoryDAO.Instance.InsertFoodCategory(name))
+                    {
+                        MessageBox.Show("Thêm danh mục thành công");
+                        LoadListCategoryFood();
+                        if (insertFoodCategory != null)
+                            insertFoodCategory(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi thêm danh mục");
+                    }
                 }
             }
         }
+
 
         private void btnEditFoodCategory_Click(object sender, EventArgs e)
         {
@@ -168,5 +186,7 @@ namespace DoAnQuanLyQuanNhau
 
 
         #endregion
+
+     
     }
 }
