@@ -86,7 +86,7 @@ namespace DoAnQuanLyQuanNhau
             this.txbPassword.Location = new System.Drawing.Point(195, 11);
             this.txbPassword.Name = "txbPassword";
             this.txbPassword.Size = new System.Drawing.Size(357, 22);
-            this.txbPassword.TabIndex = 1;
+            this.txbPassword.TabIndex = 2;
             // 
             // label2
             // 
