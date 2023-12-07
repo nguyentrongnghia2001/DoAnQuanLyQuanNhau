@@ -34,10 +34,25 @@ namespace DoAnQuanLyQuanNhau
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            frmManager f = new frmManager();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            string username = txbUserName.Text;
+            string password = txbUserName.Text;
+            if (Login(username,password))
+            {
+                frmManager f = new frmManager();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
+            }
+        }
+
+        bool Login(string username, string passWord)
+        {
+            //return AccountDAO.Instance.Login(username, passWord);
+            return true;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
