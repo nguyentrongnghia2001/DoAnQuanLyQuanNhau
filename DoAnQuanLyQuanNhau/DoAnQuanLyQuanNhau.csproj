@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\FoodCategoryDAO.cs" />
+    <Compile Include="DAO\TableFoodDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DTO\FoodCategory.cs" />
+    <Compile Include="DTO\TableFood.cs" />
     <Compile Include="frmAccountProfile.cs">
       <SubType>Form</SubType>
     </Compile>

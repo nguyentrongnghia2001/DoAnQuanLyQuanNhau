@@ -9,8 +9,9 @@ namespace DoAnQuanLyQuanNhau.DTO
 {
     public class Account
     {
-        public Account(int idOffice, string username, string fullName, string phone, string address, int type, string password = null)
+        public Account(int id, int idOffice, string username, string fullName, string phone, string address, int type, string password = null)
         {
+            this.Id = id;
             this.idOffice = idOffice;
             this.Username = username;
             this.Password = password;
@@ -23,6 +24,7 @@ namespace DoAnQuanLyQuanNhau.DTO
 
         public Account(DataRow row)
         {
+            this.Id = (int)row["id"];
             this.idOffice = (int)row["id_office"];
             this.Username = row["username"].ToString();
             this.FullName = row["fullname"].ToString();
@@ -32,6 +34,7 @@ namespace DoAnQuanLyQuanNhau.DTO
             this.Password = row["password"].ToString();
         }
 
+        private int id;
         private int idOffice;
         private string username;
         private string password;
@@ -47,5 +50,6 @@ namespace DoAnQuanLyQuanNhau.DTO
         public string Address { get => address; set => address = value; }
         public string Phone { get => phone; set => phone = value; }
         public int Type { get => type; set => type = value; }
+        public int Id { get => id; set => id = value; }
     }
 }
