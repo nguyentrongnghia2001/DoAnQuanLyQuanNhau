@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoAnQuanLyQuanNhau.DAO;
+using DoAnQuanLyQuanNhau.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +17,39 @@ namespace DoAnQuanLyQuanNhau
         public frmManager()
         {
             InitializeComponent();
+            LoadTableFood();
         }
+
+        #region Method
+        void LoadTableFood()
+        {
+            flpTableFood.Controls.Clear();
+
+            List<TableFood> tableList = TableFoodDAO.Instance.GetListTableFood();
+
+            foreach (TableFood item in tableList)
+            {
+                Button btn = new Button() { Width = TableFoodDAO.TableWidth, Height = TableFoodDAO.TableHeight };
+                btn.Text = item.Name + " - " + item.Position + Environment.NewLine + (item.Is_empty == 1 ? "Trống" : "Có Khách");
+                //btn.Click += btn_Click;
+                //btn.Tag = item;
+                switch (item.Is_empty)
+                {
+                    case 1:
+                        btn.BackColor = Color.Aqua;
+                        break;
+                    default:
+                        btn.BackColor = Color.Orange;
+                        break;
+                }
+
+                flpTableFood.Controls.Add(btn);
+            }
+        }
+        #endregion
+
+
+        #region Events
 
         private void thôngTinToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -49,5 +83,11 @@ namespace DoAnQuanLyQuanNhau
             f.ShowDialog();
             this.Show();
         }
+
+        private void frmManager_Load(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
