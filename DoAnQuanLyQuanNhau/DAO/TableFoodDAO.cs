@@ -18,8 +18,8 @@ namespace DoAnQuanLyQuanNhau.DAO
             private set { TableFoodDAO.instance = value; }
         }
 
-        public static int TableWidth = 85;
-        public static int TableHeight = 85;
+        public static int TableWidth = 95;
+        public static int TableHeight = 95;
 
         private TableFoodDAO() { }
 

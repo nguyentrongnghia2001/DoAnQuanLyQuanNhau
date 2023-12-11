@@ -37,7 +37,7 @@ namespace DoAnQuanLyQuanNhau
             this.thôngTinTàiKhoảnToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lsvOrder = new System.Windows.Forms.ListView();
+            this.lsvBill = new System.Windows.Forms.ListView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.nmPriceFoodMain = new System.Windows.Forms.NumericUpDown();
             this.btnAddFoodMain = new System.Windows.Forms.Button();
@@ -45,13 +45,17 @@ namespace DoAnQuanLyQuanNhau
             this.cbbFoodMain = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flpTableFood = new System.Windows.Forms.FlowLayoutPanel();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -70,7 +74,7 @@ namespace DoAnQuanLyQuanNhau
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1428, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1428, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +82,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             this.adminToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
             this.adminToolStripMenuItem.Text = "Admin";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
@@ -86,7 +90,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             this.danhMucjToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.danhMucjToolStripMenuItem.Name = "danhMucjToolStripMenuItem";
-            this.danhMucjToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.danhMucjToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
             this.danhMucjToolStripMenuItem.Text = "Danh Mục";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
@@ -96,7 +100,7 @@ namespace DoAnQuanLyQuanNhau
             this.đăngXuấtToolStripMenuItem});
             this.thôngTinTàiKhoảnToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(107, 26);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Tài Khoản";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem1
@@ -115,24 +119,32 @@ namespace DoAnQuanLyQuanNhau
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.lsvOrder);
+            this.panel2.Controls.Add(this.lsvBill);
             this.panel2.Location = new System.Drawing.Point(636, 137);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(555, 520);
             this.panel2.TabIndex = 2;
             // 
-            // lsvOrder
+            // lsvBill
             // 
-            this.lsvOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lsvBill.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsvOrder.HideSelection = false;
-            this.lsvOrder.Location = new System.Drawing.Point(2, 3);
-            this.lsvOrder.Name = "lsvOrder";
-            this.lsvOrder.Size = new System.Drawing.Size(550, 514);
-            this.lsvOrder.TabIndex = 0;
-            this.lsvOrder.UseCompatibleStateImageBehavior = false;
-            this.lsvOrder.SelectedIndexChanged += new System.EventHandler(this.lsvOrder_SelectedIndexChanged);
+            this.lsvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lsvBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvBill.GridLines = true;
+            this.lsvBill.HideSelection = false;
+            this.lsvBill.Location = new System.Drawing.Point(2, 3);
+            this.lsvBill.Name = "lsvBill";
+            this.lsvBill.Size = new System.Drawing.Size(550, 514);
+            this.lsvBill.TabIndex = 0;
+            this.lsvBill.UseCompatibleStateImageBehavior = false;
+            this.lsvBill.View = System.Windows.Forms.View.Details;
+            this.lsvBill.SelectedIndexChanged += new System.EventHandler(this.lsvOrder_SelectedIndexChanged);
             // 
             // panel4
             // 
@@ -195,7 +207,7 @@ namespace DoAnQuanLyQuanNhau
             // panel3
             // 
             this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.txbTotalPrice);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.comboBox1);
@@ -216,13 +228,17 @@ namespace DoAnQuanLyQuanNhau
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
-            // textBox1
+            // txbTotalPrice
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 582);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 30);
-            this.textBox1.TabIndex = 5;
+            this.txbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbTotalPrice.ForeColor = System.Drawing.Color.Red;
+            this.txbTotalPrice.Location = new System.Drawing.Point(61, 582);
+            this.txbTotalPrice.Multiline = true;
+            this.txbTotalPrice.Name = "txbTotalPrice";
+            this.txbTotalPrice.ReadOnly = true;
+            this.txbTotalPrice.Size = new System.Drawing.Size(153, 30);
+            this.txbTotalPrice.TabIndex = 5;
+            this.txbTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -284,10 +300,35 @@ namespace DoAnQuanLyQuanNhau
             // 
             // flpTableFood
             // 
+            this.flpTableFood.AutoScroll = true;
+            this.flpTableFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flpTableFood.Location = new System.Drawing.Point(12, 31);
             this.flpTableFood.Name = "flpTableFood";
             this.flpTableFood.Size = new System.Drawing.Size(614, 620);
             this.flpTableFood.TabIndex = 0;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tên Món";
+            this.columnHeader1.Width = 160;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Số Lượng";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 65;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Đơn Giá";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader3.Width = 85;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Thành Tiền";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 85;
             // 
             // frmManager
             // 
@@ -299,6 +340,7 @@ namespace DoAnQuanLyQuanNhau
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmManager";
@@ -324,7 +366,7 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ListView lsvOrder;
+        private System.Windows.Forms.ListView lsvBill;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox cbbCategoryMain;
         private System.Windows.Forms.ComboBox cbbFoodMain;
@@ -332,7 +374,7 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.Button btnAddFoodMain;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbTotalPrice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -343,6 +385,10 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flpTableFood;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 
