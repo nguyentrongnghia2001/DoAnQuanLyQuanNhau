@@ -36,5 +36,21 @@ namespace DoAnQuanLyQuanNhau.DAO
             }
             return -1;
         }
+        public void AddBill(int id)
+        {
+            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood", new object[] {id});
+        }
+
+        public int GetMaxIDBill()
+        {
+            try
+            {
+                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM Bill");
+            }
+            catch
+            {
+                return 1;
+            }
+        }
     }
 }

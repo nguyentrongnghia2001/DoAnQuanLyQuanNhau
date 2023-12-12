@@ -38,5 +38,14 @@ namespace DoAnQuanLyQuanNhau.DAO
 
             return list;
         }
+
+        public bool UpdateUnEmptyTableFood(int id)
+        {
+            string query = string.Format("UPDATE TableFood SET is_empty = 0 WHERE id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
     }
 }

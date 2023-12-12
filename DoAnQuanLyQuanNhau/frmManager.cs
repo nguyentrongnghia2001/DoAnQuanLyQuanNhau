@@ -19,6 +19,7 @@ namespace DoAnQuanLyQuanNhau
         {
             InitializeComponent();
             LoadTableFood();
+            LoadFoodCategory();
         }
 
         #region Method
@@ -48,7 +49,21 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
-        void showBill(int id)
+        void LoadFoodCategory()
+        {
+            List<FoodCategory> listFoodCategory = FoodCategoryDAO.Instance.GetListFoodCategory();
+            cbbCategoryMain.DataSource = listFoodCategory;
+            cbbCategoryMain.DisplayMember = "name";
+        }
+
+        void LoadListFoodByIdCategory(int id)
+        {
+            List<Food> listFood = FoodDAO.Instance.getFoodByIdCategory(id);
+            cbbFoodMain.DataSource = listFood;
+            cbbFoodMain.DisplayMember = "name";
+
+        }
+        void ShowBill(int id)
         {
             lsvBill.Items.Clear();
             //List<BillDetail> listBillDetal = BillDetailDAO.Instance.GetListBillDetail(BillDAO.Instance.GetUncheckBillIDByTableID(id));
@@ -75,7 +90,8 @@ namespace DoAnQuanLyQuanNhau
         private void btn_Click(object sender, EventArgs e)
         {
             int tableId = ((sender as Button).Tag as TableFood).Id;
-            showBill(tableId);
+            lsvBill.Tag = (sender as Button).Tag;
+            ShowBill(tableId);
         }
 
         private void thôngTinToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,11 +106,6 @@ namespace DoAnQuanLyQuanNhau
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
@@ -115,6 +126,45 @@ namespace DoAnQuanLyQuanNhau
         {
 
         }
+        private void cbbCategoryMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+            ComboBox cbb = sender as ComboBox;
+            if (cbb.SelectedItem == null)
+                return;
+
+            FoodCategory selected = cbb.SelectedItem as FoodCategory;
+            id = selected.ID;
+            LoadListFoodByIdCategory(id);
+        }
+        private void btnAddFoodMain_Click(object sender, EventArgs e)
+        {
+            TableFood table = lsvBill.Tag as TableFood;
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn");
+                return;
+            }
+
+            int idFood = (cbbFoodMain.SelectedItem as Food).Id;
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+            int quantity = (int)nmCountFoodMain.Value;
+            if (idBill == -1)
+            {
+                BillDAO.Instance.AddBill(table.Id);
+                BillDetailDAO.Instance.AddBillDetail(BillDAO.Instance.GetMaxIDBill(), idFood, quantity);
+                MessageBox.Show("Thêm thành công");
+            }
+            else
+            {
+                BillDetailDAO.Instance.AddBillDetail(idBill, idFood, quantity);
+                MessageBox.Show("Thêm thành công");
+            }
+            TableFoodDAO.Instance.UpdateUnEmptyTableFood(table.Id);
+            ShowBill(table.Id);
+            LoadTableFood();
+        }
+
         #endregion
     }
 }

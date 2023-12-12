@@ -35,5 +35,10 @@ namespace DoAnQuanLyQuanNhau.DAO
 
             return list;
         }
+
+        public void AddBillDetail(int idBill, int idFood, int quantity)
+        {
+            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBillDetail @idBill , @idFood , @quantity", new object[] { idBill, idFood, quantity });
+        }
     }
 }

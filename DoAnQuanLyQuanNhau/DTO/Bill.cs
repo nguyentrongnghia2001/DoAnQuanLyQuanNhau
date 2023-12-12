@@ -9,12 +9,13 @@ namespace DoAnQuanLyQuanNhau.DTO
 {
     public class Bill
     {
-        public Bill(int id, int id_account, DateTime? data_check_in, DateTime? data_check_out, int is_pay, int status)
+        public Bill(int id, int id_account, DateTime? data_check_in, DateTime? data_check_out, float total_price,  int is_pay, int status)
         {
             this.Id = id;
             this.Id_account = id_account;
             this.Data_check_in = data_check_in;
             this.Data_check_out = data_check_out;
+            this.Total_price = total_price;
             this.Is_pay = is_pay;
             this.Status = status;
         }
@@ -27,7 +28,7 @@ namespace DoAnQuanLyQuanNhau.DTO
             var dateCheckOutTemp = row["data_check_out"];
             if (dateCheckOutTemp.ToString() != "")
                 this.Data_check_out = (DateTime?)dateCheckOutTemp;
-
+            this.Total_price = (float)Convert.ToDouble(row["total_price"].ToString());
             this.Status = (int)row["status"];
             this.Is_pay = (int)row["is_pay"];
         }
@@ -36,6 +37,7 @@ namespace DoAnQuanLyQuanNhau.DTO
         private int id_account;
         private DateTime? data_check_in;
         private DateTime? data_check_out;
+        private float total_price;
         private int is_pay;
         private int status;
 
@@ -45,5 +47,6 @@ namespace DoAnQuanLyQuanNhau.DTO
         public DateTime? Data_check_out { get => data_check_out; set => data_check_out = value; }
         public int Is_pay { get => is_pay; set => is_pay = value; }
         public int Status { get => status; set => status = value; }
+        public float Total_price { get => total_price; set => total_price = value; }
     }
 }
