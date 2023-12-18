@@ -18,8 +18,8 @@ namespace DoAnQuanLyQuanNhau.DAO
             private set { TableFoodDAO.instance = value; }
         }
 
-        public static int TableWidth = 85;
-        public static int TableHeight = 85;
+        public static int TableWidth = 100;
+        public static int TableHeight = 100;
 
         private TableFoodDAO() { }
 
@@ -37,6 +37,54 @@ namespace DoAnQuanLyQuanNhau.DAO
             }
 
             return list;
+        }
+
+        public List<TableFood> GetListEmptyTableFood()
+        {
+            List<TableFood> list = new List<TableFood>();
+
+            string query = "SELECT * FROM TableFood WHERE status = 1 AND is_empty = 1";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                TableFood tablefood = new TableFood(item);
+                list.Add(tablefood);
+            }
+
+            return list;
+        }
+
+        public List<TableFood> GetListUnEmptyTableFood()
+        {
+            List<TableFood> list = new List<TableFood>();
+
+            string query = "SELECT * FROM TableFood WHERE status = 1 AND is_empty = 0";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                TableFood tablefood = new TableFood(item);
+                list.Add(tablefood);
+            }
+
+            return list;
+        }
+
+
+        public bool UpdateUnEmptyTableFood(int id)
+        {
+            string query = string.Format("UPDATE TableFood SET is_empty = 0 WHERE id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool UpdateEmptyTableFood(int id)
+        {
+            string query = string.Format("UPDATE TableFood SET is_empty = 1 WHERE id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
         }
     }
 }
