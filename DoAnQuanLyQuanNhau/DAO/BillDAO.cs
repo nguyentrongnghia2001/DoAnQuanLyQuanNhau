@@ -52,5 +52,10 @@ namespace DoAnQuanLyQuanNhau.DAO
                 return 1;
             }
         }
+        public void CheckOutBill(int id,float totalPrice)
+        {
+            string query = "UPDATE Bill SET is_pay = 0 , data_check_out = GETDATE(), total_price = " + totalPrice + "WHERE id = " + id;
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
     }
 }

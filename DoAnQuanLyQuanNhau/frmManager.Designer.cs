@@ -51,7 +51,7 @@ namespace DoAnQuanLyQuanNhau
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCheckOutMain = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -236,7 +236,7 @@ namespace DoAnQuanLyQuanNhau
             this.panel3.Controls.Add(this.pictureBox2);
             this.panel3.Controls.Add(this.txbTotalPrice);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.button2);
+            this.panel3.Controls.Add(this.btnCheckOutMain);
             this.panel3.Controls.Add(this.comboBox1);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.pictureBox1);
@@ -257,7 +257,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             // txbTotalPrice
             // 
-            this.txbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbTotalPrice.ForeColor = System.Drawing.Color.Red;
             this.txbTotalPrice.Location = new System.Drawing.Point(61, 582);
             this.txbTotalPrice.Multiline = true;
@@ -277,20 +277,21 @@ namespace DoAnQuanLyQuanNhau
             this.label1.TabIndex = 4;
             this.label1.Text = "Tổng Tiền:";
             // 
-            // button2
+            // btnCheckOutMain
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Coral;
-            this.button2.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.money;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(3, 281);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(211, 69);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Thanh Toán";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCheckOutMain.BackColor = System.Drawing.Color.White;
+            this.btnCheckOutMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckOutMain.ForeColor = System.Drawing.Color.Coral;
+            this.btnCheckOutMain.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.money;
+            this.btnCheckOutMain.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCheckOutMain.Location = new System.Drawing.Point(3, 281);
+            this.btnCheckOutMain.Name = "btnCheckOutMain";
+            this.btnCheckOutMain.Size = new System.Drawing.Size(211, 69);
+            this.btnCheckOutMain.TabIndex = 3;
+            this.btnCheckOutMain.Text = "Thanh Toán";
+            this.btnCheckOutMain.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCheckOutMain.UseVisualStyleBackColor = false;
+            this.btnCheckOutMain.Click += new System.EventHandler(this.btnCheckOutMain_Click);
             // 
             // comboBox1
             // 
@@ -344,6 +345,7 @@ namespace DoAnQuanLyQuanNhau
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -380,7 +382,7 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox txbTotalPrice;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCheckOutMain;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;

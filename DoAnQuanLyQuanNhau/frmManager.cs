@@ -165,6 +165,37 @@ namespace DoAnQuanLyQuanNhau
             LoadTableFood();
         }
 
+        private void btnCheckOutMain_Click(object sender, EventArgs e)
+        {
+            TableFood table = lsvBill.Tag as TableFood;
+            CultureInfo culture = new CultureInfo("vi-VN");
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn");
+                return;
+            }
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+
+            if (idBill == -1)
+            {
+                MessageBox.Show("Bàn chưa có món nào!");
+                return;
+            }
+            else
+            {
+                if (MessageBox.Show(string.Format("Bạn có muốn thanh toán bàn này ({0})\nTổng tiền = {1}", table.Name + " - " + table.Position, (totalPrice*1000).ToString("c", culture)), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice*1000);
+                    TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
+                    ShowBill(table.Id);
+                    LoadTableFood();
+                }
+            }
+        }
+
         #endregion
+
     }
 }
