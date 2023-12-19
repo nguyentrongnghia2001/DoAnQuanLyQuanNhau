@@ -57,5 +57,11 @@ namespace DoAnQuanLyQuanNhau.DAO
             string query = "UPDATE Bill SET is_pay = 0 , data_check_out = GETDATE(), total_price = " + totalPrice + "WHERE id = " + id;
             DataProvider.Instance.ExecuteNonQuery(query);
         }
+
+        public void UpdateIdTableSwap(int idTableFood, int idBill)
+        {
+            string query = "UPDATE Bill SET id_table_food = " + idTableFood + "WHERE id = " + idBill;
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
     }
 }

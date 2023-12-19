@@ -20,6 +20,7 @@ namespace DoAnQuanLyQuanNhau
             InitializeComponent();
             LoadTableFood();
             LoadFoodCategory();
+            LoadTableFoodEmpty();
         }
 
         #region Method
@@ -56,6 +57,7 @@ namespace DoAnQuanLyQuanNhau
             cbbCategoryMain.DisplayMember = "name";
         }
 
+
         void LoadListFoodByIdCategory(int id)
         {
             List<Food> listFood = FoodDAO.Instance.getFoodByIdCategory(id);
@@ -63,6 +65,15 @@ namespace DoAnQuanLyQuanNhau
             cbbFoodMain.DisplayMember = "name";
 
         }
+
+        void LoadTableFoodEmpty()
+        {
+            List<TableFood> list = TableFoodDAO.Instance.GetListEmptyTableFood();
+            cbbTableFoodEmpty.DataSource = list;
+            cbbTableFoodEmpty.ValueMember = "id";
+            cbbTableFoodEmpty.DisplayMember = "Display_cbb";
+        }
+
         void ShowBill(int id)
         {
             lsvBill.Items.Clear();
@@ -89,9 +100,24 @@ namespace DoAnQuanLyQuanNhau
         #region Events
         private void btn_Click(object sender, EventArgs e)
         {
-            int tableId = ((sender as Button).Tag as TableFood).Id;
-            lsvBill.Tag = (sender as Button).Tag;
-            ShowBill(tableId);
+            //int tableId = ((sender as Button).Tag as TableFood).Id;
+            //lsvBill.Tag = (sender as Button).Tag;
+            ///ShowBill(tableId);
+
+            // Lấy đối tượng TableFood từ Tag của Button
+            TableFood selectedTable = (sender as Button)?.Tag as TableFood;
+
+            if (selectedTable != null)
+            {
+                // Gán tên bàn vào TextBox (txtTableName là TextBox hiển thị tên bàn)
+                txbTableFoodSelected.Text = selectedTable.Name + " - " + selectedTable.Position;
+
+                // Lưu thông tin bàn vào Tag của ListView (nếu cần)
+                lsvBill.Tag = selectedTable;
+
+                // Hiển thị hóa đơn cho bàn
+                ShowBill(selectedTable.Id);
+            }
         }
 
         private void thôngTinToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,6 +188,7 @@ namespace DoAnQuanLyQuanNhau
             }
             TableFoodDAO.Instance.UpdateUnEmptyTableFood(table.Id);
             ShowBill(table.Id);
+            LoadTableFoodEmpty();
             LoadTableFood();
         }
 
@@ -190,12 +217,47 @@ namespace DoAnQuanLyQuanNhau
                     BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice*1000);
                     TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
                     ShowBill(table.Id);
+                    LoadTableFoodEmpty();
                     LoadTableFood();
                 }
             }
         }
+        private void btnSwapTableFood_Click(object sender, EventArgs e)
+        {
+            int idTableFoodReceive = (int)cbbTableFoodEmpty.SelectedValue;
+
+            TableFood table = lsvBill.Tag as TableFood;
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn muốn chuyển!");
+                return;
+            }
+            else
+            {
+                if(table.Is_empty == 1)
+                {
+                    MessageBox.Show("Bàn không hợp lệ! Vui lòng chọn bàn khác!");
+                    return;
+                }
+                else
+                {
+                    if (MessageBox.Show(string.Format("Bạn có muốn chuyển bàn không?"), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                        BillDAO.Instance.UpdateIdTableSwap(idTableFoodReceive, idBill);
+                        TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
+                        TableFoodDAO.Instance.UpdateUnEmptyTableFood(idTableFoodReceive);
+                        LoadTableFoodEmpty();
+                        LoadTableFood();
+                        txbTableFoodSelected.Text = "";
+                        ShowBill(idTableFoodReceive);
+                    }
+                }
+            }
+        }
+
+
 
         #endregion
-
     }
 }

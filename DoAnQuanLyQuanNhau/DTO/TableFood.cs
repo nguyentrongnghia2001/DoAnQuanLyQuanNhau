@@ -34,5 +34,6 @@ namespace DoAnQuanLyQuanNhau.DTO
         public string Position { get => position; set => position = value; }
         public int Is_empty { get => is_empty; set => is_empty = value; }
         public string Name { get => name; set => name = value; }
+        public string Display_cbb => $"{Name} - {Position}";
     }
 }
