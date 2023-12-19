@@ -48,16 +48,17 @@ namespace DoAnQuanLyQuanNhau
             this.cbbCategoryMain = new System.Windows.Forms.ComboBox();
             this.cbbFoodMain = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txbTableFoodSelected = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCheckOutMain = new System.Windows.Forms.Button();
             this.cbbTableFoodEmpty = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSwapTableFood = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flpTableFood = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txbTableFoodSelected = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -76,7 +77,7 @@ namespace DoAnQuanLyQuanNhau
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1428, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1428, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,7 +85,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             this.adminToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.adminToolStripMenuItem.Text = "Admin";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
@@ -92,7 +93,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             this.danhMucjToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.danhMucjToolStripMenuItem.Name = "danhMucjToolStripMenuItem";
-            this.danhMucjToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
+            this.danhMucjToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.danhMucjToolStripMenuItem.Text = "Danh Mục";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
@@ -102,7 +103,7 @@ namespace DoAnQuanLyQuanNhau
             this.đăngXuấtToolStripMenuItem});
             this.thôngTinTàiKhoảnToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(107, 26);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Tài Khoản";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem1
@@ -235,6 +236,7 @@ namespace DoAnQuanLyQuanNhau
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.txbTableFoodSelected);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.pictureBox2);
@@ -242,12 +244,44 @@ namespace DoAnQuanLyQuanNhau
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.btnCheckOutMain);
             this.panel3.Controls.Add(this.cbbTableFoodEmpty);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.btnSwapTableFood);
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(1197, 31);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(219, 623);
             this.panel3.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(57, 235);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Chuyển đến";
+            // 
+            // txbTableFoodSelected
+            // 
+            this.txbTableFoodSelected.BackColor = System.Drawing.Color.Orange;
+            this.txbTableFoodSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbTableFoodSelected.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.txbTableFoodSelected.Location = new System.Drawing.Point(7, 207);
+            this.txbTableFoodSelected.Multiline = true;
+            this.txbTableFoodSelected.Name = "txbTableFoodSelected";
+            this.txbTableFoodSelected.ReadOnly = true;
+            this.txbTableFoodSelected.Size = new System.Drawing.Size(203, 25);
+            this.txbTableFoodSelected.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 184);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Bàn đang chọn:";
             // 
             // pictureBox2
             // 
@@ -288,9 +322,9 @@ namespace DoAnQuanLyQuanNhau
             this.btnCheckOutMain.ForeColor = System.Drawing.Color.Coral;
             this.btnCheckOutMain.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.money;
             this.btnCheckOutMain.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCheckOutMain.Location = new System.Drawing.Point(3, 281);
+            this.btnCheckOutMain.Location = new System.Drawing.Point(8, 482);
             this.btnCheckOutMain.Name = "btnCheckOutMain";
-            this.btnCheckOutMain.Size = new System.Drawing.Size(211, 69);
+            this.btnCheckOutMain.Size = new System.Drawing.Size(203, 69);
             this.btnCheckOutMain.TabIndex = 3;
             this.btnCheckOutMain.Text = "Thanh Toán";
             this.btnCheckOutMain.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -299,26 +333,28 @@ namespace DoAnQuanLyQuanNhau
             // 
             // cbbTableFoodEmpty
             // 
+            this.cbbTableFoodEmpty.BackColor = System.Drawing.Color.Aqua;
             this.cbbTableFoodEmpty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbTableFoodEmpty.FormattingEnabled = true;
-            this.cbbTableFoodEmpty.Location = new System.Drawing.Point(3, 251);
+            this.cbbTableFoodEmpty.Location = new System.Drawing.Point(8, 258);
             this.cbbTableFoodEmpty.Name = "cbbTableFoodEmpty";
-            this.cbbTableFoodEmpty.Size = new System.Drawing.Size(210, 26);
+            this.cbbTableFoodEmpty.Size = new System.Drawing.Size(202, 26);
             this.cbbTableFoodEmpty.TabIndex = 2;
             // 
-            // button1
+            // btnSwapTableFood
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.transfer;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(3, 176);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(214, 69);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Chuyển Bàn";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnSwapTableFood.BackColor = System.Drawing.Color.Orange;
+            this.btnSwapTableFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwapTableFood.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.transfer;
+            this.btnSwapTableFood.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSwapTableFood.Location = new System.Drawing.Point(7, 290);
+            this.btnSwapTableFood.Name = "btnSwapTableFood";
+            this.btnSwapTableFood.Size = new System.Drawing.Size(202, 69);
+            this.btnSwapTableFood.TabIndex = 1;
+            this.btnSwapTableFood.Text = "Chuyển Bàn";
+            this.btnSwapTableFood.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSwapTableFood.UseVisualStyleBackColor = false;
+            this.btnSwapTableFood.Click += new System.EventHandler(this.btnSwapTableFood_Click);
             // 
             // pictureBox1
             // 
@@ -339,28 +375,6 @@ namespace DoAnQuanLyQuanNhau
             this.flpTableFood.Name = "flpTableFood";
             this.flpTableFood.Size = new System.Drawing.Size(614, 620);
             this.flpTableFood.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 373);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 20);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Bàn đang chọn:";
-            // 
-            // txbTableFoodSelected
-            // 
-            this.txbTableFoodSelected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txbTableFoodSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbTableFoodSelected.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.txbTableFoodSelected.Location = new System.Drawing.Point(10, 401);
-            this.txbTableFoodSelected.Multiline = true;
-            this.txbTableFoodSelected.Name = "txbTableFoodSelected";
-            this.txbTableFoodSelected.ReadOnly = true;
-            this.txbTableFoodSelected.Size = new System.Drawing.Size(140, 25);
-            this.txbTableFoodSelected.TabIndex = 8;
             // 
             // frmManager
             // 
@@ -411,7 +425,7 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCheckOutMain;
         private System.Windows.Forms.ComboBox cbbTableFoodEmpty;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSwapTableFood;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem danhMucjToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
@@ -424,6 +438,7 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbTableFoodSelected;
+        private System.Windows.Forms.Label label3;
     }
 }
 
