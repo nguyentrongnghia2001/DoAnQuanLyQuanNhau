@@ -100,10 +100,6 @@ namespace DoAnQuanLyQuanNhau
         #region Events
         private void btn_Click(object sender, EventArgs e)
         {
-            //int tableId = ((sender as Button).Tag as TableFood).Id;
-            //lsvBill.Tag = (sender as Button).Tag;
-            ///ShowBill(tableId);
-
             // Lấy đối tượng TableFood từ Tag của Button
             TableFood selectedTable = (sender as Button)?.Tag as TableFood;
 
@@ -189,6 +185,7 @@ namespace DoAnQuanLyQuanNhau
             TableFoodDAO.Instance.UpdateUnEmptyTableFood(table.Id);
             ShowBill(table.Id);
             LoadTableFoodEmpty();
+            nmCountFoodMain.Value = 1;
             LoadTableFood();
         }
 
@@ -241,7 +238,7 @@ namespace DoAnQuanLyQuanNhau
                 }
                 else
                 {
-                    if (MessageBox.Show(string.Format("Bạn có muốn chuyển bàn không?"), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                    if (MessageBox.Show(string.Format("Bạn có muốn chuyển từ ({0}) sang ({1}) không?", table.Name + " - " + table.Position, cbbTableFoodEmpty.Text) , "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                     {
                         int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
                         BillDAO.Instance.UpdateIdTableSwap(idTableFoodReceive, idBill);

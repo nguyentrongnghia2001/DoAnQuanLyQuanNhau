@@ -27,6 +27,9 @@ namespace DoAnQuanLyQuanNhau
             dgvFoodCategory.DataSource = foodCategoryList;
             LoadListCategoryFood();
             AddCategoryFoodBinding();
+
+            LoadDateTimePickerBill();
+            LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
         }
 
         void LoadListCategoryFood()
@@ -39,6 +42,18 @@ namespace DoAnQuanLyQuanNhau
             txbCategoryFoodId.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "id", true, DataSourceUpdateMode.Never));
             txbCategoryFoodName.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "name", true, DataSourceUpdateMode.Never));
         }
+
+        void LoadDateTimePickerBill()
+        {
+            DateTime today = DateTime.Now;
+            dtpFromDate.Value = new DateTime(today.Year, today.Month, 1);
+            dtpToDate.Value = dtpFromDate.Value.AddMonths(1).AddDays(-1);
+        }
+        void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
+        {
+            dgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
+        }
+
 
         #endregion
 
@@ -153,6 +168,33 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        private void btnViewBill_Click(object sender, EventArgs e)
+        {
+            LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
+
+            double totalSum = 0;
+
+            foreach (DataGridViewRow row in dgvBill.Rows)
+            {
+                if (row.Cells["col_total"].Value != null && row.Cells["col_total"].Value != DBNull.Value)
+                {
+                    double value = Convert.ToDouble(row.Cells["col_total"].Value.ToString().Split(',')[0]);
+                    totalSum += value;
+            
+                }
+            }
+
+            // Hiển thị tổng trong một TextBox hoặc nơi khác tùy ý
+            txbSumBill.Text = string.Format("{0:N0} ₫", totalSum*1000);
+
+        }
+
+        private void btnResetViewBill_Click(object sender, EventArgs e)
+        {
+            LoadDateTimePickerBill();
+            LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
+        }
+
 
 
         private event EventHandler insertFoodCategory;
@@ -185,8 +227,7 @@ namespace DoAnQuanLyQuanNhau
         }
 
 
-        #endregion
 
-     
+        #endregion
     }
 }

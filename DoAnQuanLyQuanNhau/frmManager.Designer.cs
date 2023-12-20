@@ -186,14 +186,15 @@ namespace DoAnQuanLyQuanNhau
             // 
             // nmCountFoodMain
             // 
-            this.nmCountFoodMain.Location = new System.Drawing.Point(504, 39);
+            this.nmCountFoodMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nmCountFoodMain.Location = new System.Drawing.Point(490, 39);
             this.nmCountFoodMain.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nmCountFoodMain.Name = "nmCountFoodMain";
-            this.nmCountFoodMain.Size = new System.Drawing.Size(39, 22);
+            this.nmCountFoodMain.Size = new System.Drawing.Size(53, 24);
             this.nmCountFoodMain.TabIndex = 3;
             this.nmCountFoodMain.Value = new decimal(new int[] {
             1,
@@ -217,21 +218,21 @@ namespace DoAnQuanLyQuanNhau
             // 
             // cbbCategoryMain
             // 
-            this.cbbCategoryMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbCategoryMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbCategoryMain.FormattingEnabled = true;
             this.cbbCategoryMain.Location = new System.Drawing.Point(10, 52);
             this.cbbCategoryMain.Name = "cbbCategoryMain";
-            this.cbbCategoryMain.Size = new System.Drawing.Size(266, 26);
+            this.cbbCategoryMain.Size = new System.Drawing.Size(266, 28);
             this.cbbCategoryMain.TabIndex = 1;
             this.cbbCategoryMain.SelectedIndexChanged += new System.EventHandler(this.cbbCategoryMain_SelectedIndexChanged);
             // 
             // cbbFoodMain
             // 
-            this.cbbFoodMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbFoodMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbFoodMain.FormattingEnabled = true;
             this.cbbFoodMain.Location = new System.Drawing.Point(10, 22);
             this.cbbFoodMain.Name = "cbbFoodMain";
-            this.cbbFoodMain.Size = new System.Drawing.Size(266, 26);
+            this.cbbFoodMain.Size = new System.Drawing.Size(266, 28);
             this.cbbFoodMain.TabIndex = 0;
             // 
             // panel3

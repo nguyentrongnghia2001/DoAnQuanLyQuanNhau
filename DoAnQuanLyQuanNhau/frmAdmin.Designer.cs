@@ -130,6 +130,23 @@ namespace DoAnQuanLyQuanNhau
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
+            this.tpReport = new System.Windows.Forms.TabPage();
+            this.txbSumBill = new System.Windows.Forms.TextBox();
+            this.dgvBill = new System.Windows.Forms.DataGridView();
+            this.col_position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_day_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_day_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.btnResetViewBill = new System.Windows.Forms.Button();
+            this.btnViewBill = new System.Windows.Forms.Button();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.tpCategory.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -162,6 +179,10 @@ namespace DoAnQuanLyQuanNhau
             this.panel18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.panel17.SuspendLayout();
+            this.tpReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
+            this.panel22.SuspendLayout();
+            this.panel21.SuspendLayout();
             this.SuspendLayout();
             // 
             // tpCategory
@@ -615,6 +636,7 @@ namespace DoAnQuanLyQuanNhau
             this.tcAdmin.Controls.Add(this.tpRole);
             this.tcAdmin.Controls.Add(this.tpAccount);
             this.tcAdmin.Controls.Add(this.tbTable);
+            this.tcAdmin.Controls.Add(this.tpReport);
             this.tcAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcAdmin.Location = new System.Drawing.Point(12, 12);
             this.tcAdmin.Name = "tcAdmin";
@@ -1243,6 +1265,187 @@ namespace DoAnQuanLyQuanNhau
             this.button24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button24.UseVisualStyleBackColor = false;
             // 
+            // tpReport
+            // 
+            this.tpReport.Controls.Add(this.label25);
+            this.tpReport.Controls.Add(this.txbSumBill);
+            this.tpReport.Controls.Add(this.dgvBill);
+            this.tpReport.Controls.Add(this.panel22);
+            this.tpReport.Controls.Add(this.panel21);
+            this.tpReport.Controls.Add(this.label19);
+            this.tpReport.Location = new System.Drawing.Point(4, 29);
+            this.tpReport.Name = "tpReport";
+            this.tpReport.Padding = new System.Windows.Forms.Padding(3);
+            this.tpReport.Size = new System.Drawing.Size(1397, 617);
+            this.tpReport.TabIndex = 6;
+            this.tpReport.Text = "Thông Kê";
+            this.tpReport.UseVisualStyleBackColor = true;
+            // 
+            // txbSumBill
+            // 
+            this.txbSumBill.BackColor = System.Drawing.Color.Aqua;
+            this.txbSumBill.Location = new System.Drawing.Point(1097, 135);
+            this.txbSumBill.Multiline = true;
+            this.txbSumBill.Name = "txbSumBill";
+            this.txbSumBill.ReadOnly = true;
+            this.txbSumBill.Size = new System.Drawing.Size(198, 33);
+            this.txbSumBill.TabIndex = 15;
+            // 
+            // dgvBill
+            // 
+            this.dgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_position,
+            this.col_total,
+            this.col_day_in,
+            this.col_day_out});
+            this.dgvBill.Location = new System.Drawing.Point(21, 203);
+            this.dgvBill.Name = "dgvBill";
+            this.dgvBill.ReadOnly = true;
+            this.dgvBill.RowHeadersWidth = 51;
+            this.dgvBill.RowTemplate.Height = 24;
+            this.dgvBill.Size = new System.Drawing.Size(1353, 391);
+            this.dgvBill.TabIndex = 14;
+            // 
+            // col_position
+            // 
+            this.col_position.DataPropertyName = "col_position";
+            this.col_position.HeaderText = "Vị Trí";
+            this.col_position.MinimumWidth = 6;
+            this.col_position.Name = "col_position";
+            this.col_position.ReadOnly = true;
+            // 
+            // col_total
+            // 
+            this.col_total.DataPropertyName = "col_total";
+            this.col_total.HeaderText = "Tổng Tiền";
+            this.col_total.MinimumWidth = 6;
+            this.col_total.Name = "col_total";
+            this.col_total.ReadOnly = true;
+            // 
+            // col_day_in
+            // 
+            this.col_day_in.DataPropertyName = "col_day_in";
+            this.col_day_in.HeaderText = "Ngày Vào";
+            this.col_day_in.MinimumWidth = 6;
+            this.col_day_in.Name = "col_day_in";
+            this.col_day_in.ReadOnly = true;
+            // 
+            // col_day_out
+            // 
+            this.col_day_out.DataPropertyName = "col_day_out";
+            this.col_day_out.HeaderText = "Ngày Ra";
+            this.col_day_out.MinimumWidth = 6;
+            this.col_day_out.Name = "col_day_out";
+            this.col_day_out.ReadOnly = true;
+            // 
+            // panel22
+            // 
+            this.panel22.Controls.Add(this.btnResetViewBill);
+            this.panel22.Controls.Add(this.btnViewBill);
+            this.panel22.Location = new System.Drawing.Point(751, 87);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(307, 93);
+            this.panel22.TabIndex = 13;
+            // 
+            // btnResetViewBill
+            // 
+            this.btnResetViewBill.BackColor = System.Drawing.Color.White;
+            this.btnResetViewBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetViewBill.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.reset;
+            this.btnResetViewBill.Location = new System.Drawing.Point(218, 12);
+            this.btnResetViewBill.Name = "btnResetViewBill";
+            this.btnResetViewBill.Size = new System.Drawing.Size(80, 69);
+            this.btnResetViewBill.TabIndex = 12;
+            this.btnResetViewBill.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnResetViewBill.UseVisualStyleBackColor = false;
+            this.btnResetViewBill.Click += new System.EventHandler(this.btnResetViewBill_Click);
+            // 
+            // btnViewBill
+            // 
+            this.btnViewBill.BackColor = System.Drawing.Color.Orange;
+            this.btnViewBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewBill.Image = global::DoAnQuanLyQuanNhau.Properties.Resources.save;
+            this.btnViewBill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnViewBill.Location = new System.Drawing.Point(10, 12);
+            this.btnViewBill.Name = "btnViewBill";
+            this.btnViewBill.Size = new System.Drawing.Size(202, 69);
+            this.btnViewBill.TabIndex = 11;
+            this.btnViewBill.Text = "Thống Kê";
+            this.btnViewBill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnViewBill.UseVisualStyleBackColor = false;
+            this.btnViewBill.Click += new System.EventHandler(this.btnViewBill_Click);
+            // 
+            // panel21
+            // 
+            this.panel21.Controls.Add(this.dtpFromDate);
+            this.panel21.Controls.Add(this.dtpToDate);
+            this.panel21.Controls.Add(this.label24);
+            this.panel21.Controls.Add(this.label21);
+            this.panel21.Location = new System.Drawing.Point(217, 87);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(528, 93);
+            this.panel21.TabIndex = 12;
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFromDate.Location = new System.Drawing.Point(85, 30);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(160, 27);
+            this.dtpFromDate.TabIndex = 0;
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpToDate.Location = new System.Drawing.Point(335, 29);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(160, 27);
+            this.dtpToDate.TabIndex = 1;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(269, 31);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(51, 25);
+            this.label24.TabIndex = 10;
+            this.label24.Text = "Đến";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(25, 31);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(38, 25);
+            this.label21.TabIndex = 9;
+            this.label21.Text = "Từ";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Blue;
+            this.label19.Location = new System.Drawing.Point(581, 23);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(164, 29);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "DOANH THU";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Black;
+            this.label25.Location = new System.Drawing.Point(1093, 99);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(181, 24);
+            this.label25.TabIndex = 16;
+            this.label25.Text = "Tổng Doanh Thu: ";
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1299,6 +1502,12 @@ namespace DoAnQuanLyQuanNhau
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
+            this.tpReport.ResumeLayout(false);
+            this.tpReport.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
+            this.panel22.ResumeLayout(false);
+            this.panel21.ResumeLayout(false);
+            this.panel21.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1406,5 +1615,22 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.Button btnSaveFoodCategory;
+        private System.Windows.Forms.TabPage tpReport;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DateTimePicker dtpToDate;
+        private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.Button btnViewBill;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.Button btnResetViewBill;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.DataGridView dgvBill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_in;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_out;
+        private System.Windows.Forms.TextBox txbSumBill;
+        private System.Windows.Forms.Label label25;
     }
 }
