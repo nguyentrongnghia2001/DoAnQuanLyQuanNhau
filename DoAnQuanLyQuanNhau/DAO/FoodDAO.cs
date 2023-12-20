@@ -35,6 +35,45 @@ namespace DoAnQuanLyQuanNhau.DAO
             return listFood;
         }
 
+        public List<Food> GetListFood()
+        {
+            List<Food> list = new List<Food>();
 
+            //string query = "SELECT f.id, fc.name AS name_category, f.name ,  f.price FROM Food AS f JOIN FoodCategory AS fc ON f.id_category = fc.id WHERE f.status = 1";
+            string query = "SELECT * FROM Food WHERE status = 1";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                Food f = new Food(item);
+                list.Add(f);
+            }
+
+            return list;
+        }
+
+        public bool InsertFood(string name, int idCategory, float price)
+        {
+            string query = string.Format("INSERT Food (name, id_category, price) VALUES (N'{0}', {1}, {2})", name, idCategory, price);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateFood(string name, int idFood, int idCategory, float price)
+        {
+            string query = string.Format("UPDATE Food SET name = N'{0}', id_category = {1}, price = {2} WHERE id = {3}", name, idCategory, price, idFood);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteFood(int id)
+        {
+            string query = string.Format("UPDATE dbo.Food SET status = 0 where id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }
