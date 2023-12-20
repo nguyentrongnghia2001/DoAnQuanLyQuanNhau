@@ -41,6 +41,11 @@ namespace DoAnQuanLyQuanNhau.DAO
             DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood", new object[] {id});
         }
 
+        public DataTable GetBillListByDate(DateTime dayCheckIn, DateTime dayCheckOut)
+        {
+            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut", new object[] { dayCheckIn, dayCheckOut });
+        }
+
         public int GetMaxIDBill()
         {
             try
