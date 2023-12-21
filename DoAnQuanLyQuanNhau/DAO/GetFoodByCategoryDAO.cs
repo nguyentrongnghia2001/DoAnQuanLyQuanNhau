@@ -23,7 +23,7 @@ namespace DoAnQuanLyQuanNhau.DAO
         {
             List<GetFoodByCategory> list = new List<GetFoodByCategory>();
 
-            string query = "SELECT f.id, fc.name AS name_category, f.name, f.price FROM Food AS f JOIN FoodCategory AS fc ON f.id_category = fc.id WHERE f.status = 1";
+            string query = "SELECT f.id, fc.id as id_category, fc.name AS name_category, f.name, f.price FROM Food AS f JOIN FoodCategory AS fc ON f.id_category = fc.id WHERE f.status = 1";
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)

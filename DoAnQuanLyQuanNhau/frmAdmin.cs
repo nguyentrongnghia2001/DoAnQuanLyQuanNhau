@@ -171,8 +171,8 @@ namespace DoAnQuanLyQuanNhau
                 {
                     MessageBox.Show("Sửa thành công!");
                     LoadListCategoryFood();
-                    if (updateFood != null)
-                        updateFood(this, new EventArgs());
+                    if (updateFoodCategory != null)
+                        updateFoodCategory(this, new EventArgs());
                 }
                 else
                 {
@@ -250,7 +250,7 @@ namespace DoAnQuanLyQuanNhau
         private void btnSaveFood_Click(object sender, EventArgs e)
         {
             string name = txbNameFood.Text;
-            int idCategory = (int)cbbFoodCategory.SelectedValue;
+            int idCategory = (cbbFoodCategory.SelectedItem as FoodCategory).ID;
             if (string.IsNullOrWhiteSpace(txbPriceFood.Text))
             {
                 MessageBox.Show("Giá trống!");
@@ -410,8 +410,41 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        private void txbIdFood_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvFood.SelectedCells.Count > 0)
+                {
+                    int id = (int)dgvFood.SelectedCells[0].OwningRow.Cells["Id_category"].Value;
+
+                    FoodCategory cateogory = FoodCategoryDAO.Instance.GetCategoryByID(id);
+
+                    cbbFoodCategory.SelectedItem = cateogory;
+
+                    int index = -1;
+                    int i = 0;
+                    foreach (FoodCategory item in cbbFoodCategory.Items)
+                    {
+                        if (item.ID == cateogory.ID)
+                        {
+                            index = i;
+                            break;
+                        }
+                        i++;
+                    }
+
+                    cbbFoodCategory.SelectedIndex = index;
+                }
+            }
+            catch {
+                MessageBox.Show("Lỗi!");
+            }
+        }
 
 
         #endregion
+
+
     }
 }

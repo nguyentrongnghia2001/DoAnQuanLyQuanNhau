@@ -21,6 +21,7 @@ namespace DoAnQuanLyQuanNhau
             LoadTableFood();
             LoadFoodCategory();
             LoadTableFoodEmpty();
+            cbbFoodMain.Enabled = false;
         }
 
         #region Method
@@ -52,6 +53,7 @@ namespace DoAnQuanLyQuanNhau
 
         void LoadFoodCategory()
         {
+                                cbbFoodMain.Enabled = false;
             List<FoodCategory> listFoodCategory = FoodCategoryDAO.Instance.GetListFoodCategory();
             cbbCategoryMain.DataSource = listFoodCategory;
             cbbCategoryMain.DisplayMember = "name";
@@ -124,7 +126,25 @@ namespace DoAnQuanLyQuanNhau
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAdmin f = new frmAdmin();
+            //f.InsertFood += f_InsertFood;
+            //f.UpdateFood += f_UpdateFood;
+            //f.DeleteFood += f_DeleteFood;
             f.ShowDialog();
+        }
+
+        private void f_DeleteFood(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_UpdateFood(object sender, EventArgs e)
+        {
+            //LoadListFoodByIdCategory(cbbFoodMain.)
+        }
+
+        private void f_InsertFood(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -150,6 +170,7 @@ namespace DoAnQuanLyQuanNhau
         }
         private void cbbCategoryMain_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbbFoodMain.Enabled = true;
             int id = 0;
             ComboBox cbb = sender as ComboBox;
             if (cbb.SelectedItem == null)
@@ -161,6 +182,7 @@ namespace DoAnQuanLyQuanNhau
         }
         private void btnAddFoodMain_Click(object sender, EventArgs e)
         {
+            cbbFoodMain.Enabled = false;
             TableFood table = lsvBill.Tag as TableFood;
             if (table == null)
             {
@@ -200,7 +222,7 @@ namespace DoAnQuanLyQuanNhau
             }
 
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
-            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+            float totalPrice = (float)Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
 
             if (idBill == -1)
             {
@@ -211,7 +233,7 @@ namespace DoAnQuanLyQuanNhau
             {
                 if (MessageBox.Show(string.Format("Bạn có muốn thanh toán bàn này ({0})\nTổng tiền = {1}", table.Name + " - " + table.Position, (totalPrice*1000).ToString("c", culture)), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
-                    BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice*1000);
+                    BillDAO.Instance.CheckOutBill(idBill, totalPrice*1000);
                     TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
                     ShowBill(table.Id);
                     LoadTableFoodEmpty();

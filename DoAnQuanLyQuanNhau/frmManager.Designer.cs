@@ -152,7 +152,7 @@ namespace DoAnQuanLyQuanNhau
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên Món";
-            this.columnHeader1.Width = 160;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -164,13 +164,13 @@ namespace DoAnQuanLyQuanNhau
             // 
             this.columnHeader3.Text = "Đơn Giá";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader3.Width = 85;
+            this.columnHeader3.Width = 120;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Thành Tiền";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader4.Width = 85;
+            this.columnHeader4.Width = 130;
             // 
             // panel4
             // 

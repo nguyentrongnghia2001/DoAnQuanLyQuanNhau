@@ -29,12 +29,17 @@ namespace DoAnQuanLyQuanNhau
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tpCategory = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnSaveFoodCategory = new System.Windows.Forms.Button();
@@ -47,6 +52,8 @@ namespace DoAnQuanLyQuanNhau
             this.btnSearchFoodCategory = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvFoodCategory = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnShowFoodCategory = new System.Windows.Forms.Button();
@@ -139,10 +146,6 @@ namespace DoAnQuanLyQuanNhau
             this.label25 = new System.Windows.Forms.Label();
             this.txbSumBill = new System.Windows.Forms.TextBox();
             this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.col_position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_day_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_day_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel22 = new System.Windows.Forms.Panel();
             this.btnResetViewBill = new System.Windows.Forms.Button();
             this.btnViewBill = new System.Windows.Forms.Button();
@@ -152,12 +155,15 @@ namespace DoAnQuanLyQuanNhau
             this.label24 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id_food = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameCategoryFood = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameFood = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceFood = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_day_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_day_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpCategory.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -323,11 +329,30 @@ namespace DoAnQuanLyQuanNhau
             this.dgvFoodCategory.Name = "dgvFoodCategory";
             this.dgvFoodCategory.RowHeadersVisible = false;
             this.dgvFoodCategory.RowHeadersWidth = 51;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvFoodCategory.RowsDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvFoodCategory.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFoodCategory.RowTemplate.Height = 24;
             this.dgvFoodCategory.Size = new System.Drawing.Size(768, 493);
             this.dgvFoodCategory.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.id.DefaultCellStyle = dataGridViewCellStyle1;
+            this.id.HeaderText = "Id";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.Width = 50;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Tên Danh Mục";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 300;
             // 
             // panel3
             // 
@@ -526,6 +551,7 @@ namespace DoAnQuanLyQuanNhau
             this.txbIdFood.ReadOnly = true;
             this.txbIdFood.Size = new System.Drawing.Size(44, 25);
             this.txbIdFood.TabIndex = 7;
+            this.txbIdFood.TextChanged += new System.EventHandler(this.txbIdFood_TextChanged);
             // 
             // panel7
             // 
@@ -571,7 +597,8 @@ namespace DoAnQuanLyQuanNhau
             this.Id_food,
             this.nameCategoryFood,
             this.nameFood,
-            this.priceFood});
+            this.priceFood,
+            this.id_category});
             this.dgvFood.Location = new System.Drawing.Point(3, 3);
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.RowHeadersVisible = false;
@@ -1330,6 +1357,9 @@ namespace DoAnQuanLyQuanNhau
             // 
             // dgvBill
             // 
+            this.dgvBill.AllowUserToResizeRows = false;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvBill.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1340,42 +1370,11 @@ namespace DoAnQuanLyQuanNhau
             this.dgvBill.Location = new System.Drawing.Point(21, 203);
             this.dgvBill.Name = "dgvBill";
             this.dgvBill.ReadOnly = true;
+            this.dgvBill.RowHeadersVisible = false;
             this.dgvBill.RowHeadersWidth = 51;
             this.dgvBill.RowTemplate.Height = 24;
             this.dgvBill.Size = new System.Drawing.Size(1353, 391);
             this.dgvBill.TabIndex = 14;
-            // 
-            // col_position
-            // 
-            this.col_position.DataPropertyName = "col_position";
-            this.col_position.HeaderText = "Vị Trí";
-            this.col_position.MinimumWidth = 6;
-            this.col_position.Name = "col_position";
-            this.col_position.ReadOnly = true;
-            // 
-            // col_total
-            // 
-            this.col_total.DataPropertyName = "col_total";
-            this.col_total.HeaderText = "Tổng Tiền";
-            this.col_total.MinimumWidth = 6;
-            this.col_total.Name = "col_total";
-            this.col_total.ReadOnly = true;
-            // 
-            // col_day_in
-            // 
-            this.col_day_in.DataPropertyName = "col_day_in";
-            this.col_day_in.HeaderText = "Ngày Vào";
-            this.col_day_in.MinimumWidth = 6;
-            this.col_day_in.Name = "col_day_in";
-            this.col_day_in.ReadOnly = true;
-            // 
-            // col_day_out
-            // 
-            this.col_day_out.DataPropertyName = "col_day_out";
-            this.col_day_out.HeaderText = "Ngày Ra";
-            this.col_day_out.MinimumWidth = 6;
-            this.col_day_out.Name = "col_day_out";
-            this.col_day_out.ReadOnly = true;
             // 
             // panel22
             // 
@@ -1472,31 +1471,12 @@ namespace DoAnQuanLyQuanNhau
             this.label19.TabIndex = 5;
             this.label19.Text = "DOANH THU";
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.id.DefaultCellStyle = dataGridViewCellStyle25;
-            this.id.HeaderText = "Id";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.Width = 50;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Tên Danh Mục";
-            this.name.MinimumWidth = 6;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 300;
-            // 
             // Id_food
             // 
             this.Id_food.DataPropertyName = "ID";
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Id_food.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Id_food.DefaultCellStyle = dataGridViewCellStyle3;
             this.Id_food.HeaderText = "Id";
             this.Id_food.MinimumWidth = 6;
             this.Id_food.Name = "Id_food";
@@ -1506,8 +1486,8 @@ namespace DoAnQuanLyQuanNhau
             // nameCategoryFood
             // 
             this.nameCategoryFood.DataPropertyName = "FoodCategoryName";
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameCategoryFood.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameCategoryFood.DefaultCellStyle = dataGridViewCellStyle4;
             this.nameCategoryFood.HeaderText = "Danh Mục";
             this.nameCategoryFood.MinimumWidth = 6;
             this.nameCategoryFood.Name = "nameCategoryFood";
@@ -1517,8 +1497,8 @@ namespace DoAnQuanLyQuanNhau
             // nameFood
             // 
             this.nameFood.DataPropertyName = "Name";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameFood.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameFood.DefaultCellStyle = dataGridViewCellStyle5;
             this.nameFood.HeaderText = "Tên Món";
             this.nameFood.MinimumWidth = 6;
             this.nameFood.Name = "nameFood";
@@ -1528,14 +1508,64 @@ namespace DoAnQuanLyQuanNhau
             // priceFood
             // 
             this.priceFood.DataPropertyName = "Price";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceFood.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.priceFood.DefaultCellStyle = dataGridViewCellStyle6;
             this.priceFood.HeaderText = "Giá";
             this.priceFood.MinimumWidth = 6;
             this.priceFood.Name = "priceFood";
             this.priceFood.ReadOnly = true;
             this.priceFood.Width = 120;
+            // 
+            // id_category
+            // 
+            this.id_category.DataPropertyName = "Id_category";
+            this.id_category.HeaderText = "Id Danh Mục";
+            this.id_category.MinimumWidth = 6;
+            this.id_category.Name = "id_category";
+            this.id_category.ReadOnly = true;
+            this.id_category.Visible = false;
+            this.id_category.Width = 125;
+            // 
+            // col_position
+            // 
+            this.col_position.DataPropertyName = "col_position";
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.col_position.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col_position.HeaderText = "Vị Trí";
+            this.col_position.MinimumWidth = 6;
+            this.col_position.Name = "col_position";
+            this.col_position.ReadOnly = true;
+            // 
+            // col_total
+            // 
+            this.col_total.DataPropertyName = "col_total";
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.col_total.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col_total.HeaderText = "Tổng Tiền";
+            this.col_total.MinimumWidth = 6;
+            this.col_total.Name = "col_total";
+            this.col_total.ReadOnly = true;
+            // 
+            // col_day_in
+            // 
+            this.col_day_in.DataPropertyName = "col_day_in";
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.col_day_in.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col_day_in.HeaderText = "Ngày Vào";
+            this.col_day_in.MinimumWidth = 6;
+            this.col_day_in.Name = "col_day_in";
+            this.col_day_in.ReadOnly = true;
+            // 
+            // col_day_out
+            // 
+            this.col_day_out.DataPropertyName = "col_day_out";
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.col_day_out.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col_day_out.HeaderText = "Ngày Ra";
+            this.col_day_out.MinimumWidth = 6;
+            this.col_day_out.Name = "col_day_out";
+            this.col_day_out.ReadOnly = true;
             // 
             // frmAdmin
             // 
@@ -1713,10 +1743,6 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.Button btnResetViewBill;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.DataGridView dgvBill;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_in;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_out;
         private System.Windows.Forms.TextBox txbSumBill;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnSaveFood;
@@ -1727,5 +1753,10 @@ namespace DoAnQuanLyQuanNhau
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCategoryFood;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameFood;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceFood;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_in;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_day_out;
     }
 }
