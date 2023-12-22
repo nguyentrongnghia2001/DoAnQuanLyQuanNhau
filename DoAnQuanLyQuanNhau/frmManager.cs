@@ -23,6 +23,7 @@ namespace DoAnQuanLyQuanNhau
             get { return loginAccount; }
             set { loginAccount = value; CheckAccount(loginAccount.Type); }
         }
+        bool isExit = true;
         public frmManager(Account acc)
         {
             InitializeComponent();
@@ -180,7 +181,6 @@ namespace DoAnQuanLyQuanNhau
             frmAccountProfile f = new frmAccountProfile(loginAccount);
             f.UpdateAccount += f_UpdateAccount;
             f.ShowDialog();
-            //this.Show();
         }
 
         void f_UpdateAccount(object sender, AccountEvent e)
@@ -297,12 +297,29 @@ namespace DoAnQuanLyQuanNhau
 
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            isExit = false;
             this.Close();
+            frmLogin f = new frmLogin();
+            f.Show();
+        }
+        private void frmManager_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isExit)
+                Application.Exit();
         }
         private void frmManager_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (isExit)
+            {
+                if (MessageBox.Show("Bạn có muốn đóng ứng dụng", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
+            
         }
         #endregion
+
+       
     }
 }

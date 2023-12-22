@@ -14,6 +14,7 @@ namespace DoAnQuanLyQuanNhau
 {
     public partial class frmLogin : Form
     {
+        bool isExit = true;
         public frmLogin()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace DoAnQuanLyQuanNhau
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-         
+            Application.Exit();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -51,9 +52,8 @@ namespace DoAnQuanLyQuanNhau
                     Account loginAccount = AccountDAO.Instance.GetAccountByUserName(username);
 
                     frmManager f = new frmManager(loginAccount);
+                    f.Show();
                     this.Hide();
-                    f.ShowDialog();
-                    this.Show();
                 }
                 else
                 {
@@ -94,6 +94,11 @@ namespace DoAnQuanLyQuanNhau
             {
                 btnLogin.PerformClick();
             }
+        }
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

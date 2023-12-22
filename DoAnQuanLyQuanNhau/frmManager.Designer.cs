@@ -396,7 +396,7 @@ namespace DoAnQuanLyQuanNhau
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phầm Mềm Quản Lí Quán Nhậu ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmManager_FormClosing);
-            //this.Load += new System.EventHandler(this.frmManager_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmManager_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
