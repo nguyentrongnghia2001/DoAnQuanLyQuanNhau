@@ -42,6 +42,7 @@ namespace DoAnQuanLyQuanNhau
 
 
             //Thông Kê
+            LoadListAccount();
             LoadDateTimePickerBill();
             LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
         }
@@ -76,6 +77,14 @@ namespace DoAnQuanLyQuanNhau
             cbbFoodCategory.DisplayMember = "name";
         }
 
+        void LoadListAccount()
+        {
+            List<Account> listAcc = AccountDAO.Instance.GetListAccount();
+            cbbIdAccount.DataSource = listAcc;
+            cbbIdAccount.ValueMember = "id";
+            cbbIdAccount.DisplayMember = "fullname";
+        }
+
         void LoadListCategoryFood()
         {
             listFoodCategory.DataSource = FoodCategoryDAO.Instance.GetListFoodCategory();
@@ -89,9 +98,12 @@ namespace DoAnQuanLyQuanNhau
         }
         void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
         {
-            dgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
+            dgvBill.DataSource = BillDAO.Instance.GetBillListByDateStore(checkIn, checkOut);
         }
-
+        void LoadListBillByDateAndId(DateTime checkIn, DateTime checkOut, int idAccount)
+        {
+            dgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut, idAccount);
+        }
 
         #endregion
 
@@ -208,13 +220,14 @@ namespace DoAnQuanLyQuanNhau
 
         private void btnViewBill_Click(object sender, EventArgs e)
         {
+            int idAccount = (cbbIdAccount.SelectedItem as Account).Id;
             if ((dtpFromDate.Value == dtpToDate.Value)||(dtpFromDate.Value > dtpToDate.Value))
             {
                 MessageBox.Show("Ngày không hợp lệ!");return;
             }
             else
             {
-                LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
+                LoadListBillByDateAndId(dtpFromDate.Value, dtpToDate.Value, idAccount);
 
                 double totalSum = 0;
 
@@ -231,10 +244,37 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        private void btnViewBillStore_Click(object sender, EventArgs e)
+        {
+            if ((dtpFromDate.Value == dtpToDate.Value) || (dtpFromDate.Value > dtpToDate.Value))
+            {
+                MessageBox.Show("Ngày không hợp lệ!"); return;
+            }
+            else
+            {
+                LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
+
+                double totalSum = 0;
+
+                foreach (DataGridViewRow row in dgvBill.Rows)
+                {
+                    if (row.Cells["col_total"].Value != null && row.Cells["col_total"].Value != DBNull.Value)
+                    {
+                        double value = Convert.ToDouble(row.Cells["col_total"].Value.ToString().Split(',')[0]);
+                        totalSum += value;
+
+                    }
+                }
+                txbSumBillStore.Text = string.Format("{0:N0} ₫", totalSum * 1000);
+            }
+        }
+
         private void btnResetViewBill_Click(object sender, EventArgs e)
         {
             LoadDateTimePickerBill();
             LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
+            txbSumBill.Text = "";
+            txbSumBillStore.Text = "";
         }
 
 
@@ -449,8 +489,7 @@ namespace DoAnQuanLyQuanNhau
         }
 
 
+
         #endregion
-
-
     }
 }

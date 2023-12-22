@@ -145,25 +145,32 @@ namespace DoAnQuanLyQuanNhau
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAdmin f = new frmAdmin();
-            //f.InsertFood += f_InsertFood;
-            //f.UpdateFood += f_UpdateFood;
-            //f.DeleteFood += f_DeleteFood;
+            f.InsertFood += f_InsertFood;
+            f.UpdateFood += f_UpdateFood;
+            f.DeleteFood += f_DeleteFood;
             f.ShowDialog();
         }
 
         private void f_DeleteFood(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadListFoodByIdCategory((cbbCategoryMain.SelectedItem as FoodCategory).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as TableFood).Id);
+            LoadTableFood();
         }
 
         private void f_UpdateFood(object sender, EventArgs e)
         {
-            //LoadListFoodByIdCategory(cbbFoodMain.)
+            LoadListFoodByIdCategory((cbbCategoryMain.SelectedItem as FoodCategory).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as TableFood).Id);
         }
 
         private void f_InsertFood(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadListFoodByIdCategory((cbbCategoryMain.SelectedItem as FoodCategory).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as TableFood).Id);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -215,12 +222,13 @@ namespace DoAnQuanLyQuanNhau
             int quantity = (int)nmCountFoodMain.Value;
             if (idBill == -1)
             {
-                BillDAO.Instance.AddBill(table.Id);
+                BillDAO.Instance.AddBill(table.Id,LoginAccount.Id);
                 BillDetailDAO.Instance.AddBillDetail(BillDAO.Instance.GetMaxIDBill(), idFood, quantity);
                 MessageBox.Show("Thêm thành công");
             }
             else
             {
+                //BillDAO.Instance.AddBill(table.Id, LoginAccount.Id);
                 BillDetailDAO.Instance.AddBillDetail(idBill, idFood, quantity);
                 MessageBox.Show("Thêm thành công");
             }

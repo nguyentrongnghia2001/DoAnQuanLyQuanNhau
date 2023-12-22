@@ -36,14 +36,19 @@ namespace DoAnQuanLyQuanNhau.DAO
             }
             return -1;
         }
-        public void AddBill(int id)
+        public void AddBill(int id,int idAccount)
         {
-            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood", new object[] {id});
+            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood , @idAccount", new object[] {id, idAccount});
         }
 
-        public DataTable GetBillListByDate(DateTime dayCheckIn, DateTime dayCheckOut)
+        public DataTable GetBillListByDate(DateTime dayCheckIn, DateTime dayCheckOut, int idAccount)
         {
-            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut", new object[] { dayCheckIn, dayCheckOut });
+            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut , @idAccount", new object[] { dayCheckIn, dayCheckOut, idAccount });
+        }
+
+        public DataTable GetBillListByDateStore(DateTime dayCheckIn, DateTime dayCheckOut)
+        {
+            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDateStore @checkIn , @checkOut", new object[] { dayCheckIn, dayCheckOut });
         }
 
         public int GetMaxIDBill()

@@ -19,6 +19,23 @@ namespace DoAnQuanLyQuanNhau.DAO
 
         private AccountDAO() { }
 
+        public List<Account> GetListAccount()
+        {
+            List<Account> list = new List<Account>();
+
+            string query = "SELECT * FROM Account WHERE status = 1";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                Account account = new Account(item);
+                list.Add(account);
+            }
+
+            return list;
+        }
+
         public bool Login(string username, string password)
         {
             //byte[] temp = ASCIIEncoding.ASCII.GetBytes(passWord);
