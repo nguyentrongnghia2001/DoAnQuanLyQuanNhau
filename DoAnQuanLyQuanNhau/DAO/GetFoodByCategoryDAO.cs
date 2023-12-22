@@ -34,5 +34,24 @@ namespace DoAnQuanLyQuanNhau.DAO
 
             return list;
         }
+
+        public List<GetFoodByCategory> SearchFoodByName(string name)
+        {
+
+            List<GetFoodByCategory> list = new List<GetFoodByCategory>();
+
+            string query = string.Format("SELECT f.id, fc.id as id_category, fc.name AS name_category, f.name, f.price FROM Food AS f JOIN FoodCategory AS fc ON f.id_category = fc.id WHERE f.status = 1 AND dbo.fuConvertToUnsign1(f.name) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name);
+            //string query = string.Format("SELECT * FROM dbo.Food WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name);
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                GetFoodByCategory food = new GetFoodByCategory(item);
+                list.Add(food);
+            }
+
+            return list;
+        }
     }
 }

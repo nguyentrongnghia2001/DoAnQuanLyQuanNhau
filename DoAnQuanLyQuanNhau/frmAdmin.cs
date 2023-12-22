@@ -24,13 +24,20 @@ namespace DoAnQuanLyQuanNhau
         }
 
         #region methods
+        List<GetFoodByCategory> SearchFoodByName(string name)
+        {
+            List<GetFoodByCategory> listFood = GetFoodByCategoryDAO.Instance.SearchFoodByName(name);
+
+            return listFood;
+        }
 
         void LoadData()
         {
             //Binding Data
             dgvFoodCategory.DataSource = listFoodCategory;
             dgvFood.DataSource = listFood;
-            AddBinding();
+            AddFoodBinding();
+            AddFoodCategoryBinding();
 
             //Food Category
             LoadListCategoryFood();
@@ -57,17 +64,19 @@ namespace DoAnQuanLyQuanNhau
             dgvFood.Columns["priceFood"].DefaultCellStyle.Format = "C2";
         }
 
-        void AddBinding()
+        void AddFoodBinding()
         {
-            //FoodCategory
-            txbCategoryFoodId.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "id", true, DataSourceUpdateMode.Never));
-            txbCategoryFoodName.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "name", true, DataSourceUpdateMode.Never));
-
-            //Food
             txbIdFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "id", true, DataSourceUpdateMode.Never));
             txbNameFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "name", true, DataSourceUpdateMode.Never));
             txbPriceFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "price", true, DataSourceUpdateMode.Never));
         }
+
+        void AddFoodCategoryBinding()
+        {
+            txbCategoryFoodId.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "id", true, DataSourceUpdateMode.Never));
+            txbCategoryFoodName.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "name", true, DataSourceUpdateMode.Never));
+        }
+
 
         void LoadFoodCategory()
         {
@@ -488,7 +497,25 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        private void btnSearchFood_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbSearchFood.Text))
+            {
+                MessageBox.Show("Vui lòng nhập từ khoá!");
+            }
+            else
+            {
+                listFood.DataSource = SearchFoodByName(txbSearchFood.Text);
+            }
+        }
 
+        private void txbSearchFood_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearchFood.PerformClick();
+            }
+        }
 
         #endregion
     }

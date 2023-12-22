@@ -14,7 +14,6 @@ namespace DoAnQuanLyQuanNhau
 {
     public partial class frmLogin : Form
     {
-        bool isExit = true;
         public frmLogin()
         {
             InitializeComponent();
