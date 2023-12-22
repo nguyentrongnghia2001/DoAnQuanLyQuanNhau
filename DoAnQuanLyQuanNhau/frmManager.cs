@@ -10,14 +10,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DoAnQuanLyQuanNhau.frmAccountProfile;
 
 namespace DoAnQuanLyQuanNhau
 {
     public partial class frmManager : Form
     {
-        public frmManager()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get { return loginAccount; }
+            set { loginAccount = value; CheckAccount(loginAccount.Type); }
+        }
+        public frmManager(Account acc)
         {
             InitializeComponent();
+
+            this.LoginAccount = acc;
+
             LoadTableFood();
             LoadFoodCategory();
             LoadTableFoodEmpty();
@@ -25,6 +36,13 @@ namespace DoAnQuanLyQuanNhau
         }
 
         #region Method
+            
+        void CheckAccount(int type)
+        {
+            adminToolStripMenuItem.Enabled = type == 0;
+            thôngTinTàiKhoảnToolStripMenuItem.Text += " (" + LoginAccount.FullName + ")";
+        }
+
         void LoadTableFood()
         {
             flpTableFood.Controls.Clear();
@@ -53,7 +71,7 @@ namespace DoAnQuanLyQuanNhau
 
         void LoadFoodCategory()
         {
-                                cbbFoodMain.Enabled = false;
+            cbbFoodMain.Enabled = false;
             List<FoodCategory> listFoodCategory = FoodCategoryDAO.Instance.GetListFoodCategory();
             cbbCategoryMain.DataSource = listFoodCategory;
             cbbCategoryMain.DisplayMember = "name";
@@ -159,15 +177,17 @@ namespace DoAnQuanLyQuanNhau
 
         private void thôngTinTàiKhoảnToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmAccountProfile f = new frmAccountProfile();
+            frmAccountProfile f = new frmAccountProfile(loginAccount);
+            f.UpdateAccount += f_UpdateAccount;
             f.ShowDialog();
-            this.Show();
+            //this.Show();
         }
 
-        private void frmManager_Load(object sender, EventArgs e)
+        void f_UpdateAccount(object sender, AccountEvent e)
         {
-
+            thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản (" + e.Acc.FullName + ")";
         }
+
         private void cbbCategoryMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbbFoodMain.Enabled = true;
@@ -275,8 +295,14 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
-
-
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void frmManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
         #endregion
     }
 }

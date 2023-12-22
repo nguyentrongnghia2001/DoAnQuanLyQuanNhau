@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoAnQuanLyQuanNhau.DAO;
+using DoAnQuanLyQuanNhau.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,8 @@ namespace DoAnQuanLyQuanNhau
         public frmLogin()
         {
             InitializeComponent();
+            this.ActiveControl = txbUserName;
+            txbUserName.Focus();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -35,29 +39,61 @@ namespace DoAnQuanLyQuanNhau
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txbUserName.Text;
-            string password = txbUserName.Text;
-            if (Login(username,password))
+            string password = txbPassword.Text;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                frmManager f = new frmManager();
-                this.Hide();
-                f.ShowDialog();
-                this.Show();
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không được trống!");
             }
             else
             {
-                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
+                if (Login(username, password))
+                {
+                    Account loginAccount = AccountDAO.Instance.GetAccountByUserName(username);
+
+                    frmManager f = new frmManager(loginAccount);
+                    this.Hide();
+                    f.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!");
+                }
             }
         }
 
         bool Login(string username, string passWord)
         {
-            //return AccountDAO.Instance.Login(username, passWord);
-            return true;
+            return AccountDAO.Instance.Login(username, passWord);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
+        }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
+        }
+
+        private void txbUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
         }
     }
 }

@@ -208,21 +208,27 @@ namespace DoAnQuanLyQuanNhau
 
         private void btnViewBill_Click(object sender, EventArgs e)
         {
-            LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
-
-            double totalSum = 0;
-
-            foreach (DataGridViewRow row in dgvBill.Rows)
+            if ((dtpFromDate.Value == dtpToDate.Value)||(dtpFromDate.Value > dtpToDate.Value))
             {
-                if (row.Cells["col_total"].Value != null && row.Cells["col_total"].Value != DBNull.Value)
-                {
-                    double value = Convert.ToDouble(row.Cells["col_total"].Value.ToString().Split(',')[0]);
-                    totalSum += value;
-            
-                }
+                MessageBox.Show("Ngày không hợp lệ!");return;
             }
-            txbSumBill.Text = string.Format("{0:N0} ₫", totalSum*1000);
+            else
+            {
+                LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
 
+                double totalSum = 0;
+
+                foreach (DataGridViewRow row in dgvBill.Rows)
+                {
+                    if (row.Cells["col_total"].Value != null && row.Cells["col_total"].Value != DBNull.Value)
+                    {
+                        double value = Convert.ToDouble(row.Cells["col_total"].Value.ToString().Split(',')[0]);
+                        totalSum += value;
+
+                    }
+                }
+                txbSumBill.Text = string.Format("{0:N0} ₫", totalSum * 1000);
+            }
         }
 
         private void btnResetViewBill_Click(object sender, EventArgs e)
