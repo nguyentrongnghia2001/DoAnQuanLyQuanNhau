@@ -15,7 +15,7 @@ namespace DoAnQuanLyQuanNhau.DTO
             this.Id_category = idCategory;
             this.FoodCategoryName = foodCategoryName;
             this.Name = name;
-            this.Price = price;;
+            this.Price = price;
         }
 
         public GetFoodByCategory(DataRow row)

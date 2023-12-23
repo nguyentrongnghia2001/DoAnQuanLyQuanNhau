@@ -65,7 +65,7 @@ namespace DoAnQuanLyQuanNhau.DAO
         {
             FoodCategory category = null;
 
-            string query = "SELECT * FROM dbo.FoodCategory where id = " + id;
+            string query = "SELECT * FROM dbo.FoodCategory where id = " + id + "and status = 1";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 

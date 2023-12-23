@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,23 +37,29 @@ namespace DoAnQuanLyQuanNhau.DAO
             return list;
         }
 
+        public string GetMD5Hash(string input)
+        {
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(input);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
+
+            return hasPass;
+        }
+
+
         public bool Login(string username, string password)
         {
-            //byte[] temp = ASCIIEncoding.ASCII.GetBytes(passWord);
-            //byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
-
-            //string hasPass = "";
-
-            //foreach (byte item in hasData)
-            //{
-                //hasPass += item;
-            //}
-            //var list = hasData.ToString();
-            //list.Reverse();
+            string hasPass = GetMD5Hash(password);
 
             string query = "USP_Login @username , @password";
 
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { username, password });
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { username, hasPass });
 
             return result.Rows.Count > 0;
         }
@@ -76,5 +83,32 @@ namespace DoAnQuanLyQuanNhau.DAO
             return result > 0;
         }
 
+        public int GetMaxIdAccount()
+        {
+            try
+            {
+                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM Account");
+            }
+            catch
+            {
+                return 1;
+            }
+        }
+
+        public bool InsertAccount(string username, string fullname, string password, int idOffice)
+        {
+            string query = string.Format("INSERT Account ( username, fullname, password, id_office ) VALUES ( N'{0}', N'{1}', N'{2}', {3} )", username, fullname, password, idOffice);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteAccount(int id)
+        {
+            string query = string.Format("UPDATE dbo.Account SET status = 0 where id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }

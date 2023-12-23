@@ -17,6 +17,10 @@ namespace DoAnQuanLyQuanNhau
     {
         BindingSource listFood = new BindingSource();
         BindingSource listFoodCategory = new BindingSource();
+        BindingSource listAccount = new BindingSource();
+        BindingSource listOffical = new BindingSource();
+        BindingSource listTableFood = new BindingSource();
+        public Account loginAcc;
         public frmAdmin()
         {
             InitializeComponent();
@@ -36,8 +40,14 @@ namespace DoAnQuanLyQuanNhau
             //Binding Data
             dgvFoodCategory.DataSource = listFoodCategory;
             dgvFood.DataSource = listFood;
+            dgvAccount.DataSource = listAccount;
+            dgvOffical.DataSource = listOffical;
+            dgvTableFood.DataSource = listTableFood;
             AddFoodBinding();
+            AddTableFoodBinding();
             AddFoodCategoryBinding();
+            AddOfficalBinding();
+            AddAccountBinding();
 
             //Food Category
             LoadListCategoryFood();
@@ -47,6 +57,14 @@ namespace DoAnQuanLyQuanNhau
             LoadListFood();
             LoadFoodCategory();
 
+            //Account
+            LoadListAccountByNameOffice();
+
+            //Office
+            LoadListOffice();
+
+            //Table Food
+            LoadListTableFood();
 
             //Thông Kê
             LoadListAccount();
@@ -77,6 +95,32 @@ namespace DoAnQuanLyQuanNhau
             txbCategoryFoodName.DataBindings.Add(new Binding("Text", dgvFoodCategory.DataSource, "name", true, DataSourceUpdateMode.Never));
         }
 
+        void AddOfficalBinding()
+        {
+            txbIdOffical.DataBindings.Add(new Binding("Text", dgvOffical.DataSource, "id", true, DataSourceUpdateMode.Never));
+            txbNameOffical.DataBindings.Add(new Binding("Text", dgvOffical.DataSource, "name", true, DataSourceUpdateMode.Never));
+        }
+        void AddTableFoodBinding()
+        {
+            txbIdTableFood.DataBindings.Add(new Binding("Text", dgvTableFood.DataSource, "id", true, DataSourceUpdateMode.Never));
+            txbNameTableFood.DataBindings.Add(new Binding("Text", dgvTableFood.DataSource, "name", true, DataSourceUpdateMode.Never));
+            txbPositionTableFood.DataBindings.Add(new Binding("Text", dgvTableFood.DataSource, "position", true, DataSourceUpdateMode.Never));
+        }
+        void AddAccountBinding()
+        {
+            txbUsername.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "username", true, DataSourceUpdateMode.Never));
+            txbFullname.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "fullname", true, DataSourceUpdateMode.Never));
+            txbIdAccount.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "id", true, DataSourceUpdateMode.Never));
+        }
+        void LoadListOffice()
+        {
+            listOffical.DataSource = OfficeDAO.Instance.GetListOffice();
+
+            List<Office> list = OfficeDAO.Instance.GetListOffice();
+            cbbOffice.DataSource = list;
+            cbbOffice.ValueMember = "id";
+            cbbOffice.DisplayMember = "name";
+        }
 
         void LoadFoodCategory()
         {
@@ -88,15 +132,26 @@ namespace DoAnQuanLyQuanNhau
 
         void LoadListAccount()
         {
+            //listAccount.DataSource = AccountDAO.Instance.GetListAccount();
             List<Account> listAcc = AccountDAO.Instance.GetListAccount();
             cbbIdAccount.DataSource = listAcc;
             cbbIdAccount.ValueMember = "id";
             cbbIdAccount.DisplayMember = "fullname";
         }
 
+        void LoadListAccountByNameOffice()
+        {
+            listAccount.DataSource = GetAccountByOfficeDAO.Instance.GetListAccountByOffice();
+        }
+
         void LoadListCategoryFood()
         {
             listFoodCategory.DataSource = FoodCategoryDAO.Instance.GetListFoodCategory();
+
+        }
+        void LoadListTableFood()
+        {
+            listTableFood.DataSource = TableFoodDAO.Instance.GetListTableFood();
 
         }
         void LoadDateTimePickerBill()
@@ -120,6 +175,10 @@ namespace DoAnQuanLyQuanNhau
         {
             btnSaveFoodCategory.Enabled = false;
             btnSaveFood.Enabled = false;
+            btnSaveAccount.Enabled = false;
+            btnSaveOffical.Enabled = false;
+            btnSaveTableFood.Enabled = false;
+            btnSaveAccount.Enabled = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -188,16 +247,23 @@ namespace DoAnQuanLyQuanNhau
             }
             else
             {
-                if (FoodCategoryDAO.Instance.UpdateFoodCategory(name,id))
+                if (string.IsNullOrWhiteSpace(name))
                 {
-                    MessageBox.Show("Sửa thành công!");
-                    LoadListCategoryFood();
-                    if (updateFoodCategory != null)
-                        updateFoodCategory(this, new EventArgs());
+                    MessageBox.Show("Tên trống!");
                 }
                 else
                 {
-                    MessageBox.Show("Có lỗi khi sửa!");
+                    if (FoodCategoryDAO.Instance.UpdateFoodCategory(name, id))
+                    {
+                        MessageBox.Show("Sửa thành công!");
+                        LoadListCategoryFood();
+                        if (updateFoodCategory != null)
+                            updateFoodCategory(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi sửa!");
+                    }
                 }
             }
         }
@@ -223,6 +289,110 @@ namespace DoAnQuanLyQuanNhau
                 else
                 {
                     MessageBox.Show("Có lỗi khi xoá!");
+                }
+            }
+        }
+
+        //Offical
+        private void btnAddOffical_Click(object sender, EventArgs e)
+        {
+            txbIdOffical.Text = "";
+            txbNameOffical.Text = "";
+            btnSaveOffical.Enabled = true;
+        }
+
+        private void btnDeleteOffical_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txbIdOffical.Text);
+
+            DialogResult result = MessageBox.Show("Bạn có muốn xoá?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Xoá không thành công!");
+            }
+            else
+            {
+                if (OfficeDAO.Instance.DeleteOffice(id))
+                {
+                    MessageBox.Show("Xoá thành công!");
+                    LoadListOffice();
+                    if (deleteOffice != null)
+                        deleteOffice(this, new EventArgs());
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi xoá!");
+                }
+            }
+        }
+
+        private void btnEditOffical_Click(object sender, EventArgs e)
+        {
+            string name = txbNameOffical.Text;
+            int id = Convert.ToInt32(txbIdOffical.Text);
+
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa?", "Xác nhận sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Sửa không thành công!");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    MessageBox.Show("Tên trống!");
+                }
+                else
+                {
+                    if (OfficeDAO.Instance.UpdateOffice(name, id))
+                    {
+                        MessageBox.Show("Sửa thành công!");
+                        LoadListOffice();
+                        if (updateOffice != null)
+                            updateOffice(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi sửa!");
+                    }
+                }
+            }
+        }
+
+        private void btnShowOffical_Click(object sender, EventArgs e)
+        {
+            LoadListOffice();
+            btnSaveOffical.Enabled = false;
+        }
+
+        private void btnSaveOffical_Click(object sender, EventArgs e)
+        {
+            string name = txbNameOffical.Text;
+
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Thêm không thành công!");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    MessageBox.Show("Tên trống!");
+                }
+                else
+                {
+                    if (OfficeDAO.Instance.InsertOffice(name))
+                    {
+                        MessageBox.Show("Thêm thành công!");
+                        LoadListOffice();
+                        if (insertOffice != null)
+                            insertOffice(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi thêm!");
+                    }
                 }
             }
         }
@@ -274,7 +444,7 @@ namespace DoAnQuanLyQuanNhau
 
                     }
                 }
-                txbSumBillStore.Text = string.Format("{0:N0} ₫", totalSum * 1000);
+                txbSumBill.Text = string.Format("{0:N0} ₫", totalSum * 1000);
             }
         }
 
@@ -283,7 +453,6 @@ namespace DoAnQuanLyQuanNhau
             LoadDateTimePickerBill();
             LoadListBillByDate(dtpFromDate.Value, dtpToDate.Value);
             txbSumBill.Text = "";
-            txbSumBillStore.Text = "";
         }
 
 
@@ -410,6 +579,204 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        //Table Food
+        private void btnAddTableFood_Click(object sender, EventArgs e)
+        {
+            txbIdTableFood.Text = "";
+            txbNameTableFood.Text = "";
+            txbPositionTableFood.Text = "";
+            btnSaveTableFood.Enabled = true;
+        }
+
+        private void btnDeleteTableFood_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txbIdTableFood.Text);
+
+            DialogResult result = MessageBox.Show("Bạn có muốn xoá?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Xoá không thành công!");
+            }
+            else
+            {
+                if (TableFoodDAO.Instance.DeleteTableFood(id))
+                {
+                    MessageBox.Show("Xoá thành công!");
+                    LoadListTableFood();
+                    if (deleteTableFood != null)
+                        deleteTableFood(this, new EventArgs());
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi xoá!");
+                }
+            }
+        }
+
+        private void btnEditTableFood_Click(object sender, EventArgs e)
+        {
+            string name = txbNameTableFood.Text;
+            string position = txbPositionTableFood.Text;
+            int id = Convert.ToInt32(txbIdTableFood.Text);
+
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa?", "Xác nhận sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Sửa không thành công!");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name)||string.IsNullOrWhiteSpace(position))
+                {
+                    MessageBox.Show("Tên hoặc vị trí trống!");
+                }
+                else
+                {
+                    if (TableFoodDAO.Instance.UpdateTableFood(name, position, id))
+                    {
+                        MessageBox.Show("Sửa thành công!");
+                        LoadListTableFood();
+                        if (updateTableFood != null)
+                            updateTableFood(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi sửa!");
+                    }
+                }
+            }
+        }
+
+        private void btnShowTableFood_Click(object sender, EventArgs e)
+        {
+            LoadListTableFood();
+            btnSaveTableFood.Enabled = false;
+        }
+
+        private void btnSaveTableFood_Click_1(object sender, EventArgs e)
+        {
+            string name = txbNameTableFood.Text;
+            string position = txbPositionTableFood.Text;
+
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Thêm không thành công!");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name)||string.IsNullOrWhiteSpace(position))
+                {
+                    MessageBox.Show("Tên hoặc vị trí trống!");
+                }
+                else
+                {
+                    if (TableFoodDAO.Instance.InsertTableFood(name,position))
+                    {
+                        MessageBox.Show("Thêm thành công!");
+                        LoadListTableFood();
+                        if (insertTableFood != null)
+                            insertTableFood(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi thêm!");
+                    }
+                }
+            }
+        }
+
+        //Account
+        private void btnSaveAccount_Click(object sender, EventArgs e)
+        {
+            string username = txbUsername.Text;
+            string fullname = txbFullname.Text;
+            int idOffice = (cbbOffice.SelectedItem as Office).Id;
+
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                MessageBox.Show("Thêm không thành công!");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(fullname))
+                {
+                    MessageBox.Show("Tên trống!");
+                }
+                else
+                {
+                    if (AccountDAO.Instance.InsertAccount(username, fullname, "1962026656160185351301320480154111117132155", idOffice))
+                    {
+                        MessageBox.Show("Thêm thành công!");
+                        LoadListAccountByNameOffice();
+                        if (insertAccount != null)
+                            insertAccount(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi thêm!");
+                    }
+                }
+            }
+        }
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            txbUsername.Text = "nv" + AccountDAO.Instance.GetMaxIdAccount();
+            btnSaveAccount.Enabled = true;
+            txbFullname.Text = "";
+            txbIdAccount.Text = "";
+        }
+
+        private void btnDeleteAcount_Click(object sender, EventArgs e)
+        {
+            if (loginAcc.Username.Equals(txbUsername.Text))
+            {
+                MessageBox.Show("Bạn không được xoá chính mình!");
+            }
+            else
+            {
+                int id = Convert.ToInt32(txbIdAccount.Text);
+
+                DialogResult result = MessageBox.Show("Bạn có muốn xoá?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    MessageBox.Show("Xoá không thành công!");
+                }
+                else
+                {
+                    if (AccountDAO.Instance.DeleteAccount(id))
+                    {
+                        MessageBox.Show("Xoá thành công!");
+                        LoadListAccountByNameOffice();
+                        if (deleteAccount != null)
+                            deleteAccount(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi xoá!");
+                    }
+                }
+            }
+        }
+
+        private void btnEditAcount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShowAccount_Click(object sender, EventArgs e)
+        {
+            LoadListAccountByNameOffice();
+            btnSaveAccount.Enabled = false;
+        }
+
 
         //Category Food
         private event EventHandler insertFoodCategory;
@@ -457,12 +824,114 @@ namespace DoAnQuanLyQuanNhau
             remove { deleteFood -= value; }
         }
 
+        //Offical Handler
+        private event EventHandler insertOffice;
+        public event EventHandler InsertOffice
+        {
+            add { insertOffice += value; }
+            remove { insertOffice -= value; }
+        }
+
+        private event EventHandler updateOffice;
+        public event EventHandler UpdateOffice
+        {
+            add { updateOffice += value; }
+            remove { updateOffice -= value; }
+        }
+
+
+        private event EventHandler deleteOffice;
+        public event EventHandler DeleteOffice
+        {
+            add { deleteOffice += value; }
+            remove { deleteOffice -= value; }
+        }
+
+        //TableFood Handler
+        private event EventHandler insertTableFood;
+        public event EventHandler InsertTableFood
+        {
+            add { insertTableFood += value; }
+            remove { insertTableFood -= value; }
+        }
+
+        private event EventHandler updateTableFood;
+        public event EventHandler UpdateTableFood
+        {
+            add { updateTableFood += value; }
+            remove { updateTableFood -= value; }
+        }
+
+
+        private event EventHandler deleteTableFood;
+        public event EventHandler DeleteTableFood
+        {
+            add { deleteTableFood += value; }
+            remove { deleteTableFood -= value; }
+        }
+
+        //Account Handler
+        private event EventHandler insertAccount;
+        public event EventHandler InsertAccount
+        {
+            add { insertAccount += value; }
+            remove { insertAccount -= value; }
+        }
+
+        private event EventHandler updateAccount;
+        public event EventHandler UpdateAccount
+        {
+            add { updateAccount += value; }
+            remove { updateAccount -= value; }
+        }
+
+
+        private event EventHandler deleteAccount;
+        public event EventHandler DeleteAccount
+        {
+            add { deleteAccount += value; }
+            remove { deleteAccount -= value; }
+        }
+
         private void txbPriceFood_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }
+        }
+
+        private void txbIdAccount_TextChanged(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    if (dgvAccount.SelectedCells.Count > 0)
+            //    {
+            //        int id = (int)dgvAccount.SelectedCells[0].OwningRow.Cells["Id_office"].Value;
+
+            //        Office office = OfficeDAO.Instance.GetOfficeByID(id);
+
+            //        cbbOffice.SelectedItem = office;
+
+            //        int index = -1;
+            //        int i = 0;
+            //        foreach (Office item in cbbOffice.Items)
+            //        {
+            //            if (item.Id == office.Id)
+            //            {
+            //                index = i;
+            //                break;
+            //            }
+            //            i++;
+            //        }
+
+            //        cbbOffice.SelectedIndex = index;
+            //    }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Lỗi!");
+            //}
         }
 
         private void txbIdFood_TextChanged(object sender, EventArgs e)
@@ -514,6 +983,24 @@ namespace DoAnQuanLyQuanNhau
             if (e.KeyCode == Keys.Enter)
             {
                 btnSearchFood.PerformClick();
+            }
+        }
+
+        private void dgvAccount_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Kiểm tra nếu là cột "type"
+            if (e.ColumnIndex == dgvAccount.Columns["type_account"].Index && e.RowIndex >= 0)
+            {
+                // Lấy giá trị của ô
+                var cellValue = dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                // Kiểm tra giá trị của ô
+                if (cellValue != null && cellValue != DBNull.Value)
+                {
+                    // Nếu giá trị là 1, hiển thị "Admin", ngược lại hiển thị "Nhân Viên"
+                    e.Value = (int)cellValue == 0 ? "Admin" : "Nhân Viên";
+                    e.FormattingApplied = true; // Đánh dấu rằng đã xử lý định dạng
+                }
             }
         }
 

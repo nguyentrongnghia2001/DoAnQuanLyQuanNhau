@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,9 +37,25 @@ namespace DoAnQuanLyQuanNhau
             txtUsernameAcc.Text = LoginAccount.Username;
         }
 
+        public string GetMD5Hash(string input)
+        {
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(input);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
+
+            return hasPass;
+        }
+
 
         void UpdateAccountInfo()
         {
+
             string fullName = txbNameAcc.Text;
             string address = txbAddressAcc.Text;
             string phone = txbPhoneAcc.Text;
@@ -46,6 +63,8 @@ namespace DoAnQuanLyQuanNhau
             string password = txtPasswordAcc.Text;
             string newPass = txtNewPasswordAcc.Text;
             string renewPass = txbReNewPassAcc.Text;
+            string hasPass = GetMD5Hash(password);
+            string hasNewPass = GetMD5Hash(newPass);
 
             if (!newPass.Equals(renewPass))
             {
@@ -53,7 +72,7 @@ namespace DoAnQuanLyQuanNhau
             }
             else
             {
-                if (AccountDAO.Instance.UpdateAccount(fullName,address,phone,username,password,newPass))
+                if (AccountDAO.Instance.UpdateAccount(fullName,address,phone,username, hasPass, hasNewPass))
                 {
                     MessageBox.Show("Cập nhật thành công");
                     if (updateAccount != null)

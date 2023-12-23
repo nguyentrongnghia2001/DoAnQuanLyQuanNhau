@@ -137,6 +137,11 @@ namespace DoAnQuanLyQuanNhau
             }
         }
 
+        private void frmManager_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void thôngTinToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -145,6 +150,7 @@ namespace DoAnQuanLyQuanNhau
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAdmin f = new frmAdmin();
+            f.loginAcc = LoginAccount;
             f.InsertFood += f_InsertFood;
             f.UpdateFood += f_UpdateFood;
             f.DeleteFood += f_DeleteFood;
@@ -326,8 +332,7 @@ namespace DoAnQuanLyQuanNhau
             }
             
         }
-        #endregion
 
-       
+        #endregion
     }
 }
