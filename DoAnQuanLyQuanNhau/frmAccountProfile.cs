@@ -72,15 +72,22 @@ namespace DoAnQuanLyQuanNhau
             }
             else
             {
-                if (AccountDAO.Instance.UpdateAccount(fullName,address,phone,username, hasPass, hasNewPass))
+                if (txbPhoneAcc.Text.Length < 10 || txbPhoneAcc.Text.Length > 10)
                 {
-                    MessageBox.Show("Cập nhật thành công");
-                    if (updateAccount != null)
-                        updateAccount(this, new AccountEvent(AccountDAO.Instance.GetAccountByUserName(username)));
+                    MessageBox.Show("Số điện thoại không hợp lệ!");
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng điền đúng mật khấu");
+                    if (AccountDAO.Instance.UpdateAccount(fullName, address, phone, username, hasPass, hasNewPass))
+                    {
+                        MessageBox.Show("Cập nhật thành công");
+                        if (updateAccount != null)
+                            updateAccount(this, new AccountEvent(AccountDAO.Instance.GetAccountByUserName(username)));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng điền đúng mật khấu");
+                    }
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace DoAnQuanLyQuanNhau.DTO
 {
     public class Bill
     {
-        public Bill(int id, int id_account, DateTime? data_check_in, DateTime? data_check_out, float total_price,  int is_pay, int status)
+        public Bill(int id, int id_account, DateTime? data_check_in, DateTime? data_check_out, float total_price,  int is_pay, int status, string name_customers, string phone)
         {
             this.Id = id;
             this.Id_account = id_account;
@@ -18,6 +18,8 @@ namespace DoAnQuanLyQuanNhau.DTO
             this.Total_price = total_price;
             this.Is_pay = is_pay;
             this.Status = status;
+            this.Phone = phone;
+            this.Name_customers = name_customers;
         }
 
         public Bill(DataRow row)
@@ -31,6 +33,8 @@ namespace DoAnQuanLyQuanNhau.DTO
             this.Total_price = (float)Convert.ToDouble(row["total_price"].ToString());
             this.Status = (int)row["status"];
             this.Is_pay = (int)row["is_pay"];
+            this.Phone = row["phone"].ToString();
+            this.Name_customers = row["name_customers"].ToString();
         }
 
         private int id;
@@ -40,6 +44,8 @@ namespace DoAnQuanLyQuanNhau.DTO
         private float total_price;
         private int is_pay;
         private int status;
+        private string phone;
+        private string name_customers;
 
         public int Id { get => id; set => id = value; }
         public int Id_account { get => id_account; set => id_account = value; }
@@ -48,5 +54,7 @@ namespace DoAnQuanLyQuanNhau.DTO
         public int Is_pay { get => is_pay; set => is_pay = value; }
         public int Status { get => status; set => status = value; }
         public float Total_price { get => total_price; set => total_price = value; }
+        public string Phone { get => phone; set => phone = value; }
+        public string Name_customers { get => name_customers; set => name_customers = value; }
     }
 }

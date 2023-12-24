@@ -265,13 +265,29 @@ namespace DoAnQuanLyQuanNhau
             }
             else
             {
-                if (MessageBox.Show(string.Format("Bạn có muốn thanh toán bàn này ({0})\nTổng tiền = {1}", table.Name + " - " + table.Position, (totalPrice*1000).ToString("c", culture)), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                if (string.IsNullOrEmpty(txbPhoneKH.Text)||string.IsNullOrEmpty(txbNameKh.Text))
                 {
-                    BillDAO.Instance.CheckOutBill(idBill, totalPrice*1000);
-                    TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
-                    ShowBill(table.Id);
-                    LoadTableFoodEmpty();
-                    LoadTableFood();
+                    MessageBox.Show("Bạn chưa nhập tên hoặc số điện thoại khách hàng!");
+                }
+                else
+                {
+                    if (txbPhoneKH.Text.Length < 10 || txbPhoneKH.Text.Length > 10)
+                    {
+                        MessageBox.Show("Số điện thoại không hợp lệ!");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show(string.Format("Bạn có muốn thanh toán bàn này ({0})\nTổng tiền = {1}", table.Name + " - " + table.Position, (totalPrice * 1000).ToString("c", culture)), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                        {
+                            BillDAO.Instance.CheckOutBill(idBill, totalPrice * 1000, txbPhoneKH.Text, txbNameKh.Text);
+                            TableFoodDAO.Instance.UpdateEmptyTableFood(table.Id);
+                            ShowBill(table.Id);
+                            LoadTableFoodEmpty();
+                            LoadTableFood();
+                            txbNameKh.Text = "";
+                            txbPhoneKH.Text = "";
+                        }
+                    }
                 }
             }
         }
@@ -333,6 +349,57 @@ namespace DoAnQuanLyQuanNhau
             
         }
 
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheckOutMain_Click(this, new EventArgs());
+        }
+
+        private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFoodMain_Click(this, new EventArgs());
+
+        }
+        private void btnSearchKh_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbPhoneKH.Text))
+            {
+                MessageBox.Show("Vui lòng nhập số điện thoại!");
+            }
+            else
+            {
+                if (txbPhoneKH.Text.Length < 10||txbPhoneKH.Text.Length>10)
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ!");
+                }
+                else
+                {
+                    if (BillDAO.Instance.GetCusByPhone(txbPhoneKH.Text) != null)
+                    {
+                        txbNameKh.Text = BillDAO.Instance.GetCusByPhone(txbPhoneKH.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tìm không thấy!");
+                    }
+                }
+            }
+        }
         #endregion
+
+        private void txbPhoneKH_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txbPhoneKH_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearchKh.PerformClick();
+            }
+        }
     }
 }
