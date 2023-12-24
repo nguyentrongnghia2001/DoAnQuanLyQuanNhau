@@ -61,6 +61,23 @@ namespace DoAnQuanLyQuanNhau.DAO
             return result > 0;
         }
 
+        public FoodCategory GetCategoryByID(int id)
+        {
+            FoodCategory category = null;
+
+            string query = "SELECT * FROM dbo.FoodCategory where id = " + id + "and status = 1";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                category = new FoodCategory(item);
+                return category;
+            }
+
+            return category;
+        }
+
     }
 }
 
