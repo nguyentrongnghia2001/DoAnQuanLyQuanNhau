@@ -9,23 +9,26 @@ namespace DoAnQuanLyQuanNhau.DTO
 {
     public class GetFoodByCategory
     {
-        public GetFoodByCategory(int id, string name, string foodCategoryName, float price)
+        public GetFoodByCategory(int id, int idCategory, string name, string foodCategoryName, float price)
         {
             this.Id = id;
+            this.Id_category = idCategory;
             this.FoodCategoryName = foodCategoryName;
             this.Name = name;
-            this.Price = price;;
+            this.Price = price;
         }
 
         public GetFoodByCategory(DataRow row)
         {
             this.Id = (int)row["id"];
+            this.Id_category = (int)row["id_category"];
             this.FoodCategoryName = row["name_category"].ToString();
             this.Name = row["name"].ToString();
             this.Price = (float)Convert.ToDouble(row["price"].ToString());
         }
 
         private int id;
+        private int id_category;
         private string name;
         private string foodCategoryName;
         private float price;
@@ -34,5 +37,6 @@ namespace DoAnQuanLyQuanNhau.DTO
         public string Name { get => name; set => name = value; }
         public string FoodCategoryName { get => foodCategoryName; set => foodCategoryName = value; }
         public float Price { get => price; set => price = value; }
+        public int Id_category { get => id_category; set => id_category = value; }
     }
 }

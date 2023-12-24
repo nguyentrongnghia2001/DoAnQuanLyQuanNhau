@@ -36,14 +36,30 @@ namespace DoAnQuanLyQuanNhau.DAO
             }
             return -1;
         }
-        public void AddBill(int id)
+        public string GetCusByPhone(string phone)
         {
-            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood", new object[] {id});
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM Bill WHERE phone = '" + phone + "' AND is_pay = 0");
+
+            if (data.Rows.Count > 0)
+            {
+                Bill bill = new Bill(data.Rows[0]);
+                return bill.Name_customers;
+            }
+            return null;
+        }
+        public void AddBill(int id,int idAccount)
+        {
+            DataProvider.Instance.ExecuteNonQuery("exec USP_AddBill @idTableFood , @idAccount", new object[] {id, idAccount});
         }
 
-        public DataTable GetBillListByDate(DateTime dayCheckIn, DateTime dayCheckOut)
+        public DataTable GetBillListByDate(DateTime dayCheckIn, DateTime dayCheckOut, int idAccount)
         {
-            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut", new object[] { dayCheckIn, dayCheckOut });
+            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut , @idAccount", new object[] { dayCheckIn, dayCheckOut, idAccount });
+        }
+
+        public DataTable GetBillListByDateStore(DateTime dayCheckIn, DateTime dayCheckOut)
+        {
+            return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDateStore @checkIn , @checkOut", new object[] { dayCheckIn, dayCheckOut });
         }
 
         public int GetMaxIDBill()
@@ -57,9 +73,9 @@ namespace DoAnQuanLyQuanNhau.DAO
                 return 1;
             }
         }
-        public void CheckOutBill(int id,float totalPrice)
+        public void CheckOutBill(int id,float totalPrice,string phone,string name)
         {
-            string query = "UPDATE Bill SET is_pay = 0 , data_check_out = GETDATE(), total_price = " + totalPrice + "WHERE id = " + id;
+            string query = "UPDATE Bill SET phone = '" + phone + "', name_customers = N'"+ name +"', is_pay = 0 , data_check_out = GETDATE(), total_price = " + totalPrice + "WHERE id = " + id;
             DataProvider.Instance.ExecuteNonQuery(query);
         }
 

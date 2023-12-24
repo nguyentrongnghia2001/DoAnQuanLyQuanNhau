@@ -16,7 +16,7 @@ namespace DoAnQuanLyQuanNhau
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmManager());
+            Application.Run(new frmLogin());
         }
     }
 }

@@ -86,5 +86,29 @@ namespace DoAnQuanLyQuanNhau.DAO
 
             return result > 0;
         }
+
+        public bool InsertTableFood(string name, string position)
+        {
+            string query = string.Format("INSERT dbo.TableFood (name, position)VALUES  (N'{0}', N'{1}')", name, position);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateTableFood(string name, string position, int id)
+        {
+            string query = string.Format("UPDATE dbo.TableFood SET name = N'{0}' , position = N'{1}' WHERE id = {2}", name, position, id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteTableFood(int id)
+        {
+            string query = string.Format("UPDATE dbo.TableFood SET status = 0 where id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }
