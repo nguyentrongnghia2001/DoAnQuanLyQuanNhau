@@ -195,7 +195,7 @@ namespace DoAnQuanLyQuanNhau
 
         private void btnAddFoodCategory_Click(object sender, EventArgs e)
         {
-            txbCategoryFoodId.Text = "";
+            //txbCategoryFoodId.Text = "";
             txbCategoryFoodName.Text = "";
             btnSaveFoodCategory.Enabled = true;
         }
@@ -296,7 +296,7 @@ namespace DoAnQuanLyQuanNhau
         //Offical
         private void btnAddOffical_Click(object sender, EventArgs e)
         {
-            txbIdOffical.Text = "";
+            //txbIdOffical.Text = "";
             txbNameOffical.Text = "";
             btnSaveOffical.Enabled = true;
         }
@@ -459,7 +459,7 @@ namespace DoAnQuanLyQuanNhau
         //Food
         private void btnAddFood_Click(object sender, EventArgs e)
         {
-            txbIdFood.Text = "";
+            //txbIdFood.Text = "";
             txbNameFood.Text = "";
             txbPriceFood.Text = "";
             btnSaveFood.Enabled = true;
@@ -496,16 +496,24 @@ namespace DoAnQuanLyQuanNhau
                     }
                     else
                     {
-                        if (FoodDAO.Instance.InsertFood(name, idCategory, price))
+                        if (price < 0 || price == 0)
                         {
-                            MessageBox.Show("Thêm thành công!");
-                            LoadListFood();
-                            if (insertFood != null)
-                                insertFood(this, new EventArgs());
+                            MessageBox.Show("Giá không hợp lệ!");
+                            return;
                         }
                         else
                         {
-                            MessageBox.Show("Có lỗi khi thêm!");
+                            if (FoodDAO.Instance.InsertFood(name, idCategory, price))
+                            {
+                                MessageBox.Show("Thêm thành công!");
+                                LoadListFood();
+                                if (insertFood != null)
+                                    insertFood(this, new EventArgs());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Có lỗi khi thêm!");
+                            }
                         }
                     }
                 }
@@ -538,16 +546,24 @@ namespace DoAnQuanLyQuanNhau
                     }
                     else
                     {
-                        if (FoodDAO.Instance.UpdateFood(name, idFood, idCategory, price))
+                        if (price < 0 || price == 0)
                         {
-                            MessageBox.Show("Sửa thành công!");
-                            LoadListFood();
-                            if (updateFood != null)
-                                updateFood(this, new EventArgs());
+                            MessageBox.Show("Giá không hợp lệ!");
+                            return;
                         }
                         else
                         {
-                            MessageBox.Show("Có lỗi khi sửa!");
+                            if (FoodDAO.Instance.UpdateFood(name, idFood, idCategory, price))
+                            {
+                                MessageBox.Show("Sửa thành công!");
+                                LoadListFood();
+                                if (updateFood != null)
+                                    updateFood(this, new EventArgs());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Có lỗi khi sửa!");
+                            }
                         }
                     }
                 }
@@ -582,7 +598,7 @@ namespace DoAnQuanLyQuanNhau
         //Table Food
         private void btnAddTableFood_Click(object sender, EventArgs e)
         {
-            txbIdTableFood.Text = "";
+            //txbIdTableFood.Text = "";
             txbNameTableFood.Text = "";
             txbPositionTableFood.Text = "";
             btnSaveTableFood.Enabled = true;
