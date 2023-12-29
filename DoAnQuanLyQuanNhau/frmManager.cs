@@ -121,19 +121,15 @@ namespace DoAnQuanLyQuanNhau
         #region Events
         private void btn_Click(object sender, EventArgs e)
         {
-            // Lấy đối tượng TableFood từ Tag của Button
             TableFood selectedTable = (sender as Button)?.Tag as TableFood;
 
             if (selectedTable != null)
             {
-                // Gán tên bàn vào TextBox (txtTableName là TextBox hiển thị tên bàn)
                 txbTableFoodSelected.Text = selectedTable.Name + " - " + selectedTable.Position;
-
-                // Lưu thông tin bàn vào Tag của ListView (nếu cần)
                 lsvBill.Tag = selectedTable;
-
-                // Hiển thị hóa đơn cho bàn
                 ShowBill(selectedTable.Id);
+                txbNameKh.Text = "";
+                txbPhoneKH.Text = "";
             }
         }
 
